@@ -27,24 +27,34 @@ public class EventHandler {
 			ConnectionEvent handler = eventhandler.getConnectionEvent();
 			MinecraftForge.EVENT_BUS.register(handler);
 			FMLCommonHandler.instance().bus().register(handler);}
-		if(MinebotConfig.events.disconnect)
-			MinecraftForge.EVENT_BUS.register(new DisconnectionEvent());
-		if(MinebotConfig.events.dimension)
-			MinecraftForge.EVENT_BUS.register(new DimensionEvent());
-		if(MinebotConfig.events.chat)
-			MinecraftForge.EVENT_BUS.register(new ChatEvent());
-		if(MinebotConfig.events.advancement)
-			MinecraftForge.EVENT_BUS.register(new AchievementEvent());
-		if(MinebotConfig.events.lightning)
-			MinecraftForge.EVENT_BUS.register(new LightningEvent());
-		if(MinebotConfig.events.death)
-			MinecraftForge.EVENT_BUS.register(new DeathEvent());
-		if(MinebotConfig.events.item)
-			MinecraftForge.EVENT_BUS.register(new itemDestructionEvent());
-		if(MinebotConfig.events.load)
-			MinecraftForge.EVENT_BUS.register(new LoadEvent());
-		if(MinebotConfig.events.unload)
-			MinecraftForge.EVENT_BUS.register(new UnloadEvent());
+		if(MinebotConfig.events.disconnect) {
+			DisconnectionEvent handler = eventhandler.getDisconnectionEvent();
+			MinecraftForge.EVENT_BUS.register(handler);
+			FMLCommonHandler.instance().bus().register(handler);}
+		if(MinebotConfig.events.dimension){
+			DimensionEvent handler = eventhandler.getDimensionEvent();
+			MinecraftForge.EVENT_BUS.register(handler);
+			FMLCommonHandler.instance().bus().register(handler);}
+		if(MinebotConfig.events.chat){
+			ChatEvent handler = eventhandler.getChatEvent();
+			MinecraftForge.EVENT_BUS.register(handler);
+			FMLCommonHandler.instance().bus().register(handler);}
+		if(MinebotConfig.events.advancement){
+			AchievementEvent handler = eventhandler.getAchievementEvent();
+			MinecraftForge.EVENT_BUS.register(handler);
+			FMLCommonHandler.instance().bus().register(handler);}
+		if(MinebotConfig.events.lightning){
+			LightningEvent handler = eventhandler.getLightningEvent();
+			MinecraftForge.EVENT_BUS.register(handler);
+			FMLCommonHandler.instance().bus().register(handler);}
+		if(MinebotConfig.events.death){
+			DeathEvent handler = eventhandler.getDeathEvent();
+			MinecraftForge.EVENT_BUS.register(handler);
+			FMLCommonHandler.instance().bus().register(handler);}
+		if(MinebotConfig.events.item){
+			ItemDestructionEvent handler = eventhandler.getItemDestructionEvent();
+			MinecraftForge.EVENT_BUS.register(handler);
+			FMLCommonHandler.instance().bus().register(handler);}
 	}
 	
 	
@@ -74,6 +84,10 @@ public class EventHandler {
 	}
 	}
 	
+	public DisconnectionEvent getDisconnectionEvent(){
+		return new DisconnectionEvent();
+	}
+	
 	@EventBusSubscriber
 	private class DimensionEvent{
 	//Dimensionswechsel Event
@@ -84,6 +98,10 @@ public class EventHandler {
 		String message = (playername+" has traveled to "+dimension.getName());
 		//Discordbot sendet String
 	}
+	}
+	
+	public DimensionEvent getDimensionEvent(){
+		return new DimensionEvent();
 	}
 	
 	@EventBusSubscriber
@@ -100,6 +118,9 @@ public class EventHandler {
 	}
 	}
 	
+	public ChatEvent getChatEvent(){
+		return new ChatEvent();
+	}
 	
 	@EventBusSubscriber
 	private class LightningEvent{
@@ -110,6 +131,10 @@ public class EventHandler {
 		String message = (name + "has been struck by lightning.");
 		//Discordbot sendet String
 	}
+	}
+	
+	public LightningEvent getLightningEvent(){
+		return new LightningEvent();
 	}
 	
 	@EventBusSubscriber
@@ -126,8 +151,12 @@ public class EventHandler {
 	}
 	}
 	
+	public DeathEvent getDeathEvent(){
+		return new DeathEvent();
+	}
+	
 	@EventBusSubscriber
-	private class itemDestructionEvent{
+	private class ItemDestructionEvent{
 	//Item Zerstörung-Event
 	@SubscribeEvent
 	public void destroyEvent(PlayerDestroyItemEvent event){
@@ -145,7 +174,12 @@ public class EventHandler {
 	}
 	}
 	
-	@EventBusSubscriber
+	public ItemDestructionEvent getItemDestructionEvent(){
+		return new ItemDestructionEvent();
+	}
+	
+	
+	/*@EventBusSubscriber
 	private class LoadEvent{
 	//Weltlade Event
 	@SubscribeEvent
@@ -153,9 +187,9 @@ public class EventHandler {
 		String message = ("The World is being loaded!");
 		//Discordbot sendet String
 	}
-	}
+	}*/
 	
-	@EventBusSubscriber
+	/*@EventBusSubscriber
 	private class UnloadEvent{
 	//Weltlade Event
 		@SubscribeEvent
@@ -164,7 +198,7 @@ public class EventHandler {
 			//Discordbot sendet String
 			SendMessage.sendMessage(message);
 		}
-	}
+	}*/
 	
 	@EventBusSubscriber
 	private class AchievementEvent{
@@ -176,5 +210,9 @@ public class EventHandler {
 		String message = player + " has gotten the Advancement: "+advancement;
 		SendMessage.sendMessage(message);
 	}
+	}
+	
+	public AchievementEvent getAchievementEvent(){
+		return new AchievementEvent();
 	}
 }

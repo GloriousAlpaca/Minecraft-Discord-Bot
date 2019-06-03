@@ -64,16 +64,10 @@ public class MinebotConfig {
 	public boolean item = true;
 	
 	@Comment({
-		  "Send a message on the world load?"
+		  "Send a message on post-Init?"
 		})
-	@Name("World load")
-	public boolean load = true;
-	
-	@Comment({
-		  "Send a message on the world unload?"
-		})
-	@Name("World unload")
-	public boolean unload = true;
+	@Name("post-Init")
+	public boolean init = true;
 	}
 	
 	public static class DiscordOptions {
