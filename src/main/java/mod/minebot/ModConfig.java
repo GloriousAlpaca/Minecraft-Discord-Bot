@@ -14,62 +14,62 @@ public class ModConfig {
 		  "Send a message if a player is connecting ?"
 	})
 	@Name("Player Connection")
-	public static boolean connect = true;
+	public boolean connect = true;
 	
 	@Comment({
 		  "Send a message if a player is disconnecting ?"
 		})
 	@Name("Player Disconnect")
-	public static boolean disconnect = true;
+	public boolean disconnect = true;
 	
 	
 	@Comment({
 		  "Send a message if a player changed his dimension ?"
 		})
 	@Name("Dimension Change")
-	public static boolean dimension = true;
+	public boolean dimension = true;
 	
 	@Comment({
 		  "Send a message if a player said something in the in-game chat ?"
 		})
 	@Name("Chat Message")
-	public static boolean chat = true;
+	public boolean chat = true;
 	
 	@Comment({
 		  "Send a message if a player got an advancement?"
 		})
 	@Name("Advancement")
-	public static boolean advancement = true;
+	public boolean advancement = true;
 	
 	@Comment({
 		  "Send a message if an entity got hit by lightning ?"
 		})
 	@Name("Lightning")
-	public static boolean lightning = true;
+	public boolean lightning = true;
 	
 	@Comment({
 		  "Send a message if an entity died?"
 		})
 	@Name("Entity death")
-	public static boolean death = true;
+	public boolean death = true;
 	
 	@Comment({
 		  "Send a message if a special item got destroyed?"
 		})
 	@Name("Item destruction")
-	public static boolean item = true;
+	public boolean item = true;
 	
 	@Comment({
 		  "Send a message on the world load?"
 		})
 	@Name("World load")
-	public static boolean load = true;
+	public boolean load = true;
 	
 	@Comment({
 		  "Send a message on the world unload?"
 		})
 	@Name("World unload")
-	public static boolean unload = true;
+	public boolean unload = true;
 	}
 	
 	private static class DiscordOptions {
@@ -77,7 +77,7 @@ public class ModConfig {
 			  "Should the Bot be started ?"
 			})
 		@Name("Bot")
-		public static boolean bot = false;
+		public boolean bot = false;
 	}
 }
 
