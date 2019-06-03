@@ -1,5 +1,6 @@
 package mod.minebot.proxy;
 
+import mod.minebot.discord.DISCORDBOT;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.TextureStitchEvent;
 
@@ -27,6 +28,6 @@ public class ClientProxy implements IProxy{
 
 	@Override
 	public void startBot() {
-		
+		new DISCORDBOT();
 	}
 }
