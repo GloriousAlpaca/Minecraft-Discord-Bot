@@ -8,9 +8,6 @@ import net.dv8tion.jda.core.entities.Game;
 public class DISCORDBOT {
 	
 	public DISCORDBOT(String[] Args) throws LoginException{
-		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
 		JDABuilder builder = new JDABuilder();
 
