@@ -5,7 +5,7 @@ import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.Name;
 
 @Config(modid = MINEBOT.MODID)
-public class ModConfig {
+public class MinebotConfig {
 	public static EventCategory Events = new EventCategory();
 	public static DiscordOptions discord = new DiscordOptions();
 	

@@ -33,6 +33,8 @@ public class EventHandler2 {
 	}
 	}
 	
+	@EventBusSubscriber
+	private class DisconnectionEvent{
 	//Player Verbindungstrennungs Event
 	@SubscribeEvent
     public void playerDisconnecting(PlayerEvent.PlayerLoggedOutEvent event){
@@ -40,7 +42,10 @@ public class EventHandler2 {
 		String message = (playername+" has disconnected from the server.");
 		//Discordbot sendet String
 	}
+	}
 	
+	@EventBusSubscriber
+	private class DimensionEvent{
 	//Dimensionswechsel Event
 	@SubscribeEvent
 	public void changeDimension(PlayerEvent.PlayerChangedDimensionEvent event){
@@ -49,7 +54,10 @@ public class EventHandler2 {
 		String message = (playername+" has traveled to "+dimension.getName());
 		//Discordbot sendet String
 	}
+	}
 	
+	@EventBusSubscriber
+	private class ChatEvent{
 	//Chatmessage Event
 	@SubscribeEvent
 	public void chatMessage(ServerChatEvent event){
@@ -60,7 +68,8 @@ public class EventHandler2 {
 		MINEBOT.LOG.info(message);
 		SendMessage.sendMessage(message);
 	}
-		
+	}
+	
 	//Blitzschlag Event
 	@SubscribeEvent
 	public void lightning(EntityStruckByLightningEvent event){

@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 
-@Mod(modid = MINEBOT.MODID, name = MINEBOT.NAME, version = MINEBOT.VERSION)
+@Mod(modid = MINEBOT.MODID, name = MINEBOT.NAME, version = MINEBOT.VERSION, guiFactory = "mod.minebot.MinebotConfigGui")
 public class MINEBOT {
 	
 	/*Formalitäten*/
