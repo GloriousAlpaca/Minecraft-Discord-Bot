@@ -11,6 +11,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.AdvancementEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -105,4 +106,13 @@ public class EventHandler {
 			//Discordbot sendet String
 			SendMessage.sendMessage(message);
 		}
+		
+	@SubscribeEvent
+	public static void onAdvancementEvent(AdvancementEvent event)
+	{
+		if (event.getAdvancement().getDisplay() != null && event.getAdvancement().getDisplay().shouldAnnounceToChat())
+		{
+			MINEBOT.LOG.info("{} got the {} advancement", event.getEntityPlayer().getDisplayNameString(), event.getAdvancement().getDisplayText().getUnformattedText());
+		}
+	}
 }
