@@ -1,5 +1,7 @@
 package mod.minebot.proxy;
 
+import javax.security.auth.login.LoginException;
+
 import mod.minebot.discord.DISCORDBOT;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -25,6 +27,11 @@ public class ServerProxy implements IProxy{
 	
 	@Override
 	public void startBot() {
-		new DISCORDBOT(null);
+		try {
+			new DISCORDBOT(null);
+		} catch (LoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

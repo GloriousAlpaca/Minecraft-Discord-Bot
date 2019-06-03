@@ -1,12 +1,14 @@
 package mod.minebot.discord;
 
+import javax.security.auth.login.LoginException;
+
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 
 public class DISCORDBOT {
 	
-	public DISCORDBOT(String[] Args){
+	public DISCORDBOT(String[] Args) throws LoginException{
 		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
@@ -17,6 +19,7 @@ public class DISCORDBOT {
 		builder.setAutoReconnect(true);
 		builder.setStatus(ReferenceClass.Status);
 		builder.setGame(Game.playing((ReferenceClass.GamePlaying)));
+		builder.build();
 
 
 
