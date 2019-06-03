@@ -1,9 +1,17 @@
 package mod.minebot;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -27,7 +35,7 @@ public class EventHandler {
 		//Discordbot sendet String
 	}
 	
-	//Player Verbindungstrennungs Event
+	//Dimensionswechsel Event
 	@SubscribeEvent
 	public void changeDimension(PlayerEvent.PlayerChangedDimensionEvent event){
 		String playername = event.player.getName();
@@ -45,11 +53,46 @@ public class EventHandler {
 		//Discordbot sendet String
 	}
 		
-	//Player Verbindungstrennungs Event
-		@SubscribeEvent
-		public void lightning(EntityStruckByLightningEvent event){
-			
-			String message = ("");
-			//Discordbot sendet String
-		}
+	//Blitzschlag Event
+	@SubscribeEvent
+	public void lightning(EntityStruckByLightningEvent event){
+		String name = event.getEntity().getName();
+		String message = (name + "has been struck by lightning.");
+		//Discordbot sendet String
+	}
+		
+	//Entity Tod Event
+	@SubscribeEvent
+	public void death(LivingDeathEvent event){
+		Entity entity = event.getEntity();
+		EntityLivingBase live = event.getEntityLiving();
+		if(entity instanceof EntityLivingBase) {
+		String deathmessage = event.getSource().getDeathMessage((EntityLivingBase) entity).getUnformattedText();}
+		
+		String message = ("");
+		//Discordbot sendet String
+	}
+		
+	//Item Zerstörung-Event
+	@SubscribeEvent
+	public void destroyEvent(PlayerDestroyItemEvent event){
+		ItemStack stack = event.getOriginal();
+		NBTTagCompound nbt = stack.getTagCompound();
+		if (nbt != null)
+        {
+            if (nbt.hasKey("Name", 8))
+            {
+                 String name = nbt.getString("Name");
+                 String message = event.getEntityPlayer().getName()+" has destroyed his "+name;
+               //Discordbot sendet String
+            }
+        }
+	}
+	
+	//Weltlade Event
+	@SubscribeEvent
+	public void worldLoad(WorldEvent.Load event){
+		String message = ("The World is being loaded!");
+		//Discordbot sendet String
+	}
 }
