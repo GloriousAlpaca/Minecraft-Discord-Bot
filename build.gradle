@@ -42,7 +42,7 @@ configurations {
 // Add dependencies
 dependencies {
     // This dependency and its transitive deps will be embedded
-    embed files("libs/JDA-3.8.3_463.jar")
+    embed files("net.dv8tion:JDA:3.8.3_463")
 }
 
 //Add dependencies to the JAR
