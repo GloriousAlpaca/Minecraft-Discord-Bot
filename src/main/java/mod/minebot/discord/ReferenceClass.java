@@ -9,7 +9,7 @@ public class ReferenceClass {
 
     }
 
-    public static String TOKEN = "MzAyODAxNzczNjE2MTY4OTYw.C9O1rQ.RVV9Etg-Hu6kODXQ7Kk7y8lM5ks";
+    public static String TOKEN = "NTg1MTAzOTg0OTIyOTg0NDc5.XPU6nQ.TJvmRHJ94BlYFIUbcMrpu1NAkbU";
     public static String GamePlaying ="Minecraft";
     public static OnlineStatus Status = OnlineStatus.ONLINE;
 }
