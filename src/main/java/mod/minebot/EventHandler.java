@@ -68,7 +68,6 @@ public class EventHandler {
 		EntityLivingBase live = event.getEntityLiving();
 		if(entity instanceof EntityLivingBase) {
 		String deathmessage = event.getSource().getDeathMessage((EntityLivingBase) entity).getUnformattedText();}
-		
 		String message = ("");
 		//Discordbot sendet String
 	}
