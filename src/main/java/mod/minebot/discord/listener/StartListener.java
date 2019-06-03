@@ -1,5 +1,7 @@
 package mod.minebot.discord.listener;
 
+import com.sun.media.jfxmedia.logging.Logger;
+import mod.minebot.MINEBOT;
 import mod.minebot.discord.DISCORDBOT;
 import mod.minebot.discord.ReferenceClass;
 import net.dv8tion.jda.core.JDA;
@@ -14,15 +16,10 @@ public class StartListener extends ListenerAdapter {
 
     public void onReady(ReadyEvent event){
 
-        for(Guild g: event.getJDA().getGuilds() ) {
-
-            //ReferenceClass.GuildID = g.getId();
-
-        }
-        event.getJDA().getGuildById(ReferenceClass.GuildID).getTextChannelById(ReferenceClass.MessageChannelID).sendMessage("Bot Gestartet");
 
 
-        ReferenceClass.guild = event.getJDA().getGuildById(ReferenceClass.GuildID);
+            event.getJDA().getGuildById(ReferenceClass.GuildID).getTextChannelById(ReferenceClass.MessageChannelID).sendMessage("Bot Gestartet");
+
     }
 
 }

@@ -2,6 +2,7 @@ package mod.minebot.discord;
 
 import javax.security.auth.login.LoginException;
 
+import mod.minebot.discord.listener.MessageListener;
 import mod.minebot.discord.listener.StartListener;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
@@ -20,6 +21,7 @@ public class DISCORDBOT {
 
         //Listener
         builder.addEventListener(new StartListener());
+        builder.addEventListener(new MessageListener());
         
 
 
