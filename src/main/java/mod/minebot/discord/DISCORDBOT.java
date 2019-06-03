@@ -7,13 +7,16 @@ import net.dv8tion.jda.core.entities.Game;
 
 public class DISCORDBOT {
 public static void DISCORDBOT(String[] Args){
+    System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+    System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+    System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
     JDABuilder builder = new JDABuilder(AccountType.BOT);
 
-    builder.setToken(Password.TOKEN);
+    builder.setToken(ReferenceClass.TOKEN);
     builder.setAutoReconnect(true);
-    builder.setStatus(OnlineStatus.ONLINE);
-    builder.setGame(Game.playing(("Minecraft")));
+    builder.setStatus(ReferenceClass.Status);
+    builder.setGame(Game.playing((ReferenceClass.GamePlaying)));
 
 
 
