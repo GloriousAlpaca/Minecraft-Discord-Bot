@@ -33,21 +33,25 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
-//Add "embedded" configuration
 configurations {
-    embed
-    compile.extendsFrom(embed)
+    inJar
 }
+configurations.compile.extendsFrom(configurations.inJar)
 
-// Add dependencies
 dependencies {
-    // This dependency and its transitive deps will be embedded
-    embed files("net.dv8tion:JDA:3.8.3_463")
+   inJar fileTree(dir: "libs", include: '*.jar')
 }
 
-//Add dependencies to the JAR
+
 jar {
-    from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
+	from(configurations.inJar) {
+        into 'META-INF/libraries'
+    }
+    manifest {
+        attributes(
+                'ContainedDeps': 'JDA-3.8.3_463.jar'
+        )
+    }
 }
 
 processResources {
