@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class EventHandler {
 	
-	public void register() {
+	public static void register() {
 		EventHandler eventhandler = new EventHandler();
 		if(MinebotConfig.events.connect) {
 			ConnectionEvent handler = eventhandler.getConnectionEvent();
