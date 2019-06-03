@@ -6,7 +6,7 @@ import net.dv8tion.jda.core.entities.Game;
 
 public class DISCORDBOT {
 	
-	public static void DISCORDBOT(String[] Args){
+	public DISCORDBOT(String[] Args){
 		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
