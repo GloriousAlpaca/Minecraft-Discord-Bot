@@ -7,10 +7,19 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 @EventBusSubscriber
 public class EventHandler {
 	
+	//Player Verbindungs Event
 	@SubscribeEvent
     public void playerConnecting(PlayerEvent.PlayerLoggedInEvent event){
 		String playername = event.player.getName();
 		String message = (playername+" is connecting to the server.");
+		//Discordbot sendet String
+	}
+	
+	//Player Verbindungstrennungs Event
+	@SubscribeEvent
+    public void playerConnecting(PlayerEvent.PlayerLoggedOutEvent event){
+		String playername = event.player.getName();
+		String message = (playername+" has disconnected from the server.");
 		//Discordbot sendet String
 	}
 }
