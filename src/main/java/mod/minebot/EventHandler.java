@@ -13,6 +13,7 @@ import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AdvancementEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -115,4 +116,14 @@ public class EventHandler {
 			MINEBOT.LOG.info("{} got the {} advancement", event.getEntityPlayer().getDisplayNameString(), event.getAdvancement().getDisplayText().getUnformattedText());
 		}
 	}
+	//Schlafengehen Event
+    @SubscribeEvent
+    public static void onPlayerSleep(PlayerSleepInBedEvent event){
+        System.out.println("Event wird gecalled");
+        String playername = event.getEntity().getName();
+        String message = (playername+" is connecting to the server.");
+        SendMessage.sendMessage(message);
+        //Discordbot sendet String
+
+    }
 }
