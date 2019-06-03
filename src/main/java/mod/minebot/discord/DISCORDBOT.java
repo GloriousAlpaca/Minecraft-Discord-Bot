@@ -2,6 +2,8 @@ package mod.minebot.discord;
 
 import javax.security.auth.login.LoginException;
 
+
+import mod.minebot.discord.listener.GuildReadyListener;
 import mod.minebot.discord.listener.MessageListener;
 import mod.minebot.discord.listener.StartListener;
 import net.dv8tion.jda.core.JDABuilder;
@@ -20,8 +22,10 @@ public class DISCORDBOT {
 		builder.setGame(Game.playing((ReferenceClass.InitialGame)));
 
         //Listener
+        builder.addEventListener(new GuildReadyListener());
         builder.addEventListener(new StartListener());
         builder.addEventListener(new MessageListener());
+
         
 
 
