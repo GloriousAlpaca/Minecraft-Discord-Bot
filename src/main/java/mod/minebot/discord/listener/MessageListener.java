@@ -8,10 +8,12 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class MessageListener extends ListenerAdapter {
 
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getMessage().getContentDisplay().contains("@MineBot")&&event.getMessage().getContentStripped().contains("setdefaultchannel")) {
+
+
+        if (event.getMessage().getContentRaw().contains("<@"+ReferenceClass.ID+">")&&event.getMessage().getContentStripped().contains("setdefaultchannel")) {
             if(event.getMember()==event.getGuild().getOwner()){
 
-                ReferenceClass.guild = event.getGuild();
+                //ReferenceClass.guild = event.getGuild();
                 ReferenceClass.ChatChannelID = event.getTextChannel().getId();
                 ReferenceClass.MessageChannelID = event.getTextChannel().getId();
                 ReferenceClass.GuildID = event.getGuild().getId();
@@ -21,6 +23,8 @@ public class MessageListener extends ListenerAdapter {
             }
             else{
                 event.getTextChannel().sendMessage("You do not have the required permissions! >:(").queue();
+                event.getTextChannel().sendMessage(ReferenceClass.guild.getId()).queue();
+
             }
 
         }
