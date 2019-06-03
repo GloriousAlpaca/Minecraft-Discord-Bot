@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "minebot",
+  "name": "Minebot",
+  "description": "A Minecraft Discord Bot",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["SaltStation, GloriousAlpaca"],
+  "credits": "Steven Wilden und Andreas Wessing",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
