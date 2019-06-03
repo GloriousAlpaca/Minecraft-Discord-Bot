@@ -2,26 +2,54 @@ package mod.minebot;
 
 import mod.minebot.discord.SendMessage;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AdvancementEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-@EventBusSubscriber
 public class EventHandler {
 	
+	public static void register() {
+		EventHandler eventhandler = new EventHandler();
+		if(MinebotConfig.events.connect) {
+			ConnectionEvent handler = eventhandler.getConnectionEvent();
+			MinecraftForge.EVENT_BUS.register(handler);
+			FMLCommonHandler.instance().bus().register(handler);}
+		if(MinebotConfig.events.disconnect)
+			MinecraftForge.EVENT_BUS.register(new DisconnectionEvent());
+		if(MinebotConfig.events.dimension)
+			MinecraftForge.EVENT_BUS.register(new DimensionEvent());
+		if(MinebotConfig.events.chat)
+			MinecraftForge.EVENT_BUS.register(new ChatEvent());
+		if(MinebotConfig.events.advancement)
+			MinecraftForge.EVENT_BUS.register(new AchievementEvent());
+		if(MinebotConfig.events.lightning)
+			MinecraftForge.EVENT_BUS.register(new LightningEvent());
+		if(MinebotConfig.events.death)
+			MinecraftForge.EVENT_BUS.register(new DeathEvent());
+		if(MinebotConfig.events.item)
+			MinecraftForge.EVENT_BUS.register(new itemDestructionEvent());
+		if(MinebotConfig.events.load)
+			MinecraftForge.EVENT_BUS.register(new LoadEvent());
+		if(MinebotConfig.events.unload)
+			MinecraftForge.EVENT_BUS.register(new UnloadEvent());
+	}
+	
+	
+	@EventBusSubscriber
+	private class ConnectionEvent{
 	//Player Verbindungs Event
 	@SubscribeEvent
     public void playerConnecting(PlayerEvent.PlayerLoggedInEvent event){
@@ -29,7 +57,14 @@ public class EventHandler {
 		String message = (playername+" is connecting to the server.");
 		//Discordbot sendet String
 	}
+	}
 	
+	public ConnectionEvent getConnectionEvent(){
+		return new ConnectionEvent();
+	}
+	
+	@EventBusSubscriber
+	private class DisconnectionEvent{
 	//Player Verbindungstrennungs Event
 	@SubscribeEvent
     public void playerDisconnecting(PlayerEvent.PlayerLoggedOutEvent event){
@@ -37,7 +72,10 @@ public class EventHandler {
 		String message = (playername+" has disconnected from the server.");
 		//Discordbot sendet String
 	}
+	}
 	
+	@EventBusSubscriber
+	private class DimensionEvent{
 	//Dimensionswechsel Event
 	@SubscribeEvent
 	public void changeDimension(PlayerEvent.PlayerChangedDimensionEvent event){
@@ -46,7 +84,10 @@ public class EventHandler {
 		String message = (playername+" has traveled to "+dimension.getName());
 		//Discordbot sendet String
 	}
+	}
 	
+	@EventBusSubscriber
+	private class ChatEvent{
 	//Chatmessage Event
 	@SubscribeEvent
 	public void chatMessage(ServerChatEvent event){
@@ -57,7 +98,11 @@ public class EventHandler {
 		MINEBOT.LOG.info(message);
 		SendMessage.sendMessage(message);
 	}
-		
+	}
+	
+	
+	@EventBusSubscriber
+	private class LightningEvent{
 	//Blitzschlag Event
 	@SubscribeEvent
 	public void lightning(EntityStruckByLightningEvent event){
@@ -65,7 +110,10 @@ public class EventHandler {
 		String message = (name + "has been struck by lightning.");
 		//Discordbot sendet String
 	}
-		
+	}
+	
+	@EventBusSubscriber
+	private class DeathEvent{
 	//Entity Tod Event
 	@SubscribeEvent
 	public void death(LivingDeathEvent event){
@@ -76,7 +124,10 @@ public class EventHandler {
 		String message = ("");
 		//Discordbot sendet String
 	}
-		
+	}
+	
+	@EventBusSubscriber
+	private class itemDestructionEvent{
 	//Item Zerstörung-Event
 	@SubscribeEvent
 	public void destroyEvent(PlayerDestroyItemEvent event){
@@ -92,14 +143,20 @@ public class EventHandler {
             }
         }
 	}
+	}
 	
+	@EventBusSubscriber
+	private class LoadEvent{
 	//Weltlade Event
 	@SubscribeEvent
 	public void worldLoad(WorldEvent.Load event){
 		String message = ("The World is being loaded!");
 		//Discordbot sendet String
 	}
+	}
 	
+	@EventBusSubscriber
+	private class UnloadEvent{
 	//Weltlade Event
 		@SubscribeEvent
 		public void worldunload(WorldEvent.Unload event){
@@ -107,23 +164,17 @@ public class EventHandler {
 			//Discordbot sendet String
 			SendMessage.sendMessage(message);
 		}
-		
-	@SubscribeEvent
-	public static void onAdvancementEvent(AdvancementEvent event)
-	{
-		if (event.getAdvancement().getDisplay() != null && event.getAdvancement().getDisplay().shouldAnnounceToChat())
-		{
-			MINEBOT.LOG.info("{} got the {} advancement", event.getEntityPlayer().getDisplayNameString(), event.getAdvancement().getDisplayText().getUnformattedText());
-		}
 	}
-	//Schlafengehen Event
-    @SubscribeEvent
-    public static void onPlayerSleep(PlayerSleepInBedEvent event){
-        System.out.println("Event wird gecalled");
-        String playername = event.getEntity().getName();
-        String message = (playername+" is connecting to the server.");
-        SendMessage.sendMessage(message);
-        //Discordbot sendet String
-
-    }
+	
+	@EventBusSubscriber
+	private class AchievementEvent{
+	@SubscribeEvent
+	public void onAdvancementEvent(AdvancementEvent event)
+	{
+		String advancement = event.getAdvancement().getDisplayText().getUnformattedText();
+		String player = event.getEntityPlayer().getDisplayNameString();
+		String message = player + " has gotten the Advancement: "+advancement;
+		SendMessage.sendMessage(message);
+	}
+	}
 }

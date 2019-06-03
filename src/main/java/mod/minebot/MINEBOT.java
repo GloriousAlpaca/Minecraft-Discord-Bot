@@ -62,9 +62,7 @@ public class MINEBOT {
     	LOG.info("Starting Bot...");
         config = new Configuration(event.getSuggestedConfigurationFile());
     	proxy.startBot();
-    	EventHandler handler = new EventHandler();
-    	MinecraftForge.EVENT_BUS.register(handler);
-    	FMLCommonHandler.instance().bus().register(handler);
+    	EventHandler.register();
 	}
     
     @Mod.EventHandler
