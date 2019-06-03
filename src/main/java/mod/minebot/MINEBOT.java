@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -51,13 +52,15 @@ public class MINEBOT {
     @Mod.Instance(MODID)
     public static MINEBOT instance;
     
+    /*Configuration*/
+    public static Configuration config;
+    
     @SuppressWarnings("deprecation")
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
     	LOG.info(NAME + " pre-initialization");
     	LOG.info("Starting Bot...");
-    	System.out.println("BBBBBBBBBBBBBBBBBBB");
-        System.out.println("BBBBBBBBBBBBBBBBBBB");
+        config = new Configuration(event.getSuggestedConfigurationFile());
     	proxy.startBot();
     	EventHandler handler = new EventHandler();
     	MinecraftForge.EVENT_BUS.register(handler);

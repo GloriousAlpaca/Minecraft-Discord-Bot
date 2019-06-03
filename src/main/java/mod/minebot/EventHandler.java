@@ -1,5 +1,6 @@
 package mod.minebot;
 
+import mod.minebot.discord.SendMessage;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -51,6 +52,8 @@ public class EventHandler {
 		String chat = event.getMessage();
 		String message = ("Message by "+username+": "+chat);
 		//Discordbot sendet String
+		MINEBOT.LOG.info(message);
+		SendMessage.sendMessage(message);
 	}
 		
 	//Blitzschlag Event
@@ -94,4 +97,12 @@ public class EventHandler {
 		String message = ("The World is being loaded!");
 		//Discordbot sendet String
 	}
+	
+	//Weltlade Event
+		@SubscribeEvent
+		public void worldunload(WorldEvent.Unload event){
+			String message = ("Server shutting down");
+			//Discordbot sendet String
+			SendMessage.sendMessage(message);
+		}
 }

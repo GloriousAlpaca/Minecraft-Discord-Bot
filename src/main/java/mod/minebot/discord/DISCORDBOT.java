@@ -20,13 +20,13 @@ public class DISCORDBOT {
 
         //Listener
         builder.addEventListener(new StartListener());
+        
 
 
 
 
-
-		builder.build();
-
+		ReferenceClass.main = builder.build();
+		
 
 
 

@@ -1,6 +1,6 @@
 package mod.minebot.discord;
 
-import net.dv8tion.jda.core.OnlineStatus;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
 
 public class ReferenceClass {
@@ -16,4 +16,5 @@ public class ReferenceClass {
     public static String ChatChannelID = "585048049303289856";
     public static String MessageChannelID = "585048049303289856";
     public static Guild guild;
+    public static JDA main;
 }
