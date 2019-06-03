@@ -2,12 +2,12 @@ package mod.minebot;
 
 import mod.minebot.discord.SendMessage;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -20,6 +20,26 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class EventHandler2 {
 	
+	public void register() {
+		
+		if(MinebotConfig.events.connect)
+		MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
+		if(MinebotConfig.events.disconnect)
+			MinecraftForge.EVENT_BUS.register(new DisconnectionEvent());
+		if(MinebotConfig.events.dimension)
+			MinecraftForge.EVENT_BUS.register(new DimensionEvent());
+		if(MinebotConfig.events.connect)
+			MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
+		if(MinebotConfig.events.connect)
+			MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
+		if(MinebotConfig.events.connect)
+			MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
+		if(MinebotConfig.events.connect)
+			MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
+		if(MinebotConfig.events.connect)
+			MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
+		
+	}
 	
 	
 	@EventBusSubscriber
@@ -70,6 +90,9 @@ public class EventHandler2 {
 	}
 	}
 	
+	
+	@EventBusSubscriber
+	private class LightningEvent{
 	//Blitzschlag Event
 	@SubscribeEvent
 	public void lightning(EntityStruckByLightningEvent event){
@@ -77,7 +100,10 @@ public class EventHandler2 {
 		String message = (name + "has been struck by lightning.");
 		//Discordbot sendet String
 	}
-		
+	}
+	
+	@EventBusSubscriber
+	private class DeathEvent{
 	//Entity Tod Event
 	@SubscribeEvent
 	public void death(LivingDeathEvent event){
@@ -88,7 +114,10 @@ public class EventHandler2 {
 		String message = ("");
 		//Discordbot sendet String
 	}
-		
+	}
+	
+	@EventBusSubscriber
+	private class DestroyEvent{
 	//Item Zerstörung-Event
 	@SubscribeEvent
 	public void destroyEvent(PlayerDestroyItemEvent event){
@@ -104,14 +133,20 @@ public class EventHandler2 {
             }
         }
 	}
+	}
 	
+	@EventBusSubscriber
+	private class LoadEvent{
 	//Weltlade Event
 	@SubscribeEvent
 	public void worldLoad(WorldEvent.Load event){
 		String message = ("The World is being loaded!");
 		//Discordbot sendet String
 	}
+	}
 	
+	@EventBusSubscriber
+	private class UnloadEvent{
 	//Weltlade Event
 		@SubscribeEvent
 		public void worldunload(WorldEvent.Unload event){
@@ -119,13 +154,17 @@ public class EventHandler2 {
 			//Discordbot sendet String
 			SendMessage.sendMessage(message);
 		}
-		
+	}
+	
+	@EventBusSubscriber
+	private class AchievementEvent{
 	@SubscribeEvent
-	public static void onAdvancementEvent(AdvancementEvent event)
+	public void onAdvancementEvent(AdvancementEvent event)
 	{
-		if (event.getAdvancement().getDisplay() != null && event.getAdvancement().getDisplay().shouldAnnounceToChat())
-		{
-			MINEBOT.LOG.info("{} got the {} advancement", event.getEntityPlayer().getDisplayNameString(), event.getAdvancement().getDisplayText().getUnformattedText());
-		}
+		String advancement = event.getAdvancement().getDisplayText().getUnformattedText();
+		String player = event.getEntityPlayer().getDisplayNameString();
+		String message = player + " has gotten the Advancement: "+advancement;
+		SendMessage.sendMessage(message);
+	}
 	}
 }

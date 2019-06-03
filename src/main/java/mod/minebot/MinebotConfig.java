@@ -3,13 +3,17 @@ package mod.minebot;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.Name;
+import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = MINEBOT.MODID)
 public class MinebotConfig {
-	public static EventCategory Events = new EventCategory();
+	public static EventCategory events = new EventCategory();
 	public static DiscordOptions discord = new DiscordOptions();
 	
-	private static class EventCategory {
+	public static class EventCategory {
 	@Comment({
 		  "Send a message if a player is connecting ?"
 	})
@@ -72,13 +76,36 @@ public class MinebotConfig {
 	public boolean unload = true;
 	}
 	
-	private static class DiscordOptions {
+	public static class DiscordOptions {
 		@Comment({
 			  "Should the Bot be started ?"
 			})
 		@Name("Bot")
 		public boolean bot = false;
+		
+		@Comment({
+			  "The Application Client ID"
+			})
+		@Name("Client ID")
+		public String clientid = "";
+	
+		@Comment({
+		  "The Bot Token"
+			})
+		@Name("Token")
+		public String token= "";
+
 	}
+	
+	@SubscribeEvent
+    public void onConfigChangedEvent(OnConfigChangedEvent event)
+    {
+        if (event.getModID().equals(MINEBOT.MODID))
+        {
+            ConfigManager.sync(MINEBOT.MODID, Type.INSTANCE);
+        }
+    }
+	
 }
 
 
