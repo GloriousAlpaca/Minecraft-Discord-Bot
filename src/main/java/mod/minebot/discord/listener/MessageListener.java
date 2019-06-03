@@ -9,18 +9,18 @@ public class MessageListener extends ListenerAdapter {
 
     public void onMessageReceived(MessageReceivedEvent event) {
         if (event.getMessage().getContentDisplay().contains("@MineBot")&&event.getMessage().getContentStripped().contains("setdefaultchannel")) {
-            if(event.getMember().getRoles().contains("Admin")){
+            if(event.getMember()==event.getGuild().getOwner()){
 
                 ReferenceClass.guild = event.getGuild();
                 ReferenceClass.ChatChannelID = event.getTextChannel().getId();
                 ReferenceClass.MessageChannelID = event.getTextChannel().getId();
                 ReferenceClass.GuildID = event.getGuild().getId();
-                SendMessage.sendMessage("The Channel "+event.getTextChannel().getName()+" was set as your default channel :)");
+                SendMessage.sendMessage("The channel "+event.getTextChannel().getName()+" was set as your default channel :)");
 
 
             }
             else{
-                SendMessage.sendMessage("You do not have the required permissions!>:(");
+                event.getTextChannel().sendMessage("You do not have the required permissions! >:(").queue();
             }
 
         }
