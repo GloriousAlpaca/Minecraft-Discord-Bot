@@ -21,4 +21,9 @@ public class ServerProxy implements IProxy{
 	@Override
 	public void registerSprites(TextureStitchEvent.Pre event) {
 	}
+	
+	@Override
+	public void startBot() {
+		
+	}
 }

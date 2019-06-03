@@ -25,4 +25,8 @@ public class ClientProxy implements IProxy{
 		
 	}
 
+	@Override
+	public void startBot() {
+		
+	}
 }

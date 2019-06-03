@@ -13,4 +13,6 @@ public interface IProxy {
 	public void registerTileEntitySpecialRenderer();
 
 	public void registerSprites(TextureStitchEvent.Pre event);
+	
+	public void startBot() ;
 }
