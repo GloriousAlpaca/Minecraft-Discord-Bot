@@ -1,5 +1,6 @@
 package mod.minebot.proxy;
 
+import mod.minebot.MINEBOT;
 import mod.minebot.discord.DISCORDBOT;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.TextureStitchEvent;
