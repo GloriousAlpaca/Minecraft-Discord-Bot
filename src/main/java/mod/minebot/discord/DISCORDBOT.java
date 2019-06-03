@@ -4,6 +4,7 @@ import javax.security.auth.login.LoginException;
 
 import mod.minebot.discord.listener.StartListener;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 
 public class DISCORDBOT {
@@ -14,8 +15,8 @@ public class DISCORDBOT {
 
 		builder.setToken(ReferenceClass.TOKEN);
 		builder.setAutoReconnect(true);
-		builder.setStatus(ReferenceClass.Status);
-		builder.setGame(Game.playing((ReferenceClass.GamePlaying)));
+		builder.setStatus(OnlineStatus.ONLINE);
+		builder.setGame(Game.playing((ReferenceClass.InitialGame)));
 
         //Listener
         builder.addEventListener(new StartListener());
