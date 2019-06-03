@@ -22,4 +22,6 @@ public class EventHandler {
 		String message = (playername+" has disconnected from the server.");
 		//Discordbot sendet String
 	}
+	
+	
 }
