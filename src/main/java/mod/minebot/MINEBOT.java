@@ -56,8 +56,6 @@ public class MINEBOT {
 	public void preInit(FMLPreInitializationEvent event) {
     	LOG.info(NAME + " pre-initialization");
     	LOG.info("Starting Bot...");
-    	System.out.println("BBBBBBBBBBBBBBBBBBB");
-        System.out.println("BBBBBBBBBBBBBBBBBBB");
     	proxy.startBot();
     	EventHandler handler = new EventHandler();
     	MinecraftForge.EVENT_BUS.register(handler);
