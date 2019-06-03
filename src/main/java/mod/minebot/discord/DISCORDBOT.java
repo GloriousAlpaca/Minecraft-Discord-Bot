@@ -18,7 +18,7 @@ public class DISCORDBOT {
 		builder.setAutoReconnect(true);
 		builder.setStatus(ReferenceClass.Status);
 		builder.setGame(Game.playing((ReferenceClass.GamePlaying)));
-		//builder.build();
+		builder.build();
 
 
 
