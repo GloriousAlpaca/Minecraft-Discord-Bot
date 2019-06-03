@@ -25,11 +25,11 @@ public class EventHandler {
 	}
 	
 	//Player Verbindungstrennungs Event
-		@SubscribeEvent
-	    public void changeDimension(PlayerEvent.PlayerChangedDimensionEvent event){
-			String playername = event.player.getName();
+	@SubscribeEvent
+	public void changeDimension(PlayerEvent.PlayerChangedDimensionEvent event){
+		String playername = event.player.getName();
 			
-			String message = (playername+" has disconnected from the server.");
-			//Discordbot sendet String
-		}
+		String message = (playername+" has traveled to ");
+		//Discordbot sendet String
+	}
 }
