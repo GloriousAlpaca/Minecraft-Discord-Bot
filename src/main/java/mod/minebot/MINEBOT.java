@@ -3,6 +3,7 @@ package mod.minebot;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import mod.minebot.discord.SendMessage;
 import mod.minebot.proxy.IProxy;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -73,6 +74,7 @@ public class MINEBOT {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		LOG.info(NAME + " is done!");
+		SendMessage.sendTestMessage();
 	}
 	
 	@Mod.EventBusSubscriber

@@ -1,6 +1,9 @@
 package mod.minebot;
 
 import mod.minebot.discord.SendMessage;
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -164,19 +167,13 @@ public class EventHandler {
 	@SubscribeEvent
 	public void destroyEvent(PlayerDestroyItemEvent event){
 		ItemStack stack = event.getOriginal();
-		NBTTagCompound nbt = stack.getTagCompound();
-		if (nbt != null)
-        {
-            if (nbt.hasKey("Name", 8))
-            {
-                 String name = nbt.getString("Name");
+		if(stack.hasDisplayName()) {
+                 String name = stack.getDisplayName();
                  String message = event.getEntityPlayer().getName()+" has destroyed his "+name;
                //Discordbot sendet String
-                 SendMessage.sendMessage(message);
+                 SendMessage.sendMessage(message);}
             }
         }
-	}
-	}
 	
 	public ItemDestructionEvent getItemDestructionEvent(){
 		return new ItemDestructionEvent();
@@ -209,10 +206,16 @@ public class EventHandler {
 	@SubscribeEvent
 	public void onAdvancementEvent(AdvancementEvent event)
 	{
-		String advancement = event.getAdvancement().getDisplayText().getUnformattedText();
+		DisplayInfo display = event.getAdvancement().getDisplay();	
 		String player = event.getEntityPlayer().getDisplayNameString();
-		String message = player + " has gotten the Advancement: **"+advancement+"**";
-		SendMessage.sendMessage(message);
+		if(!display.isHidden()) {
+		EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(16766720);
+		builder.setAuthor(player);
+		builder.setTitle(display.getTitle().getUnformattedText());
+		builder.setDescription(display.getDescription().getUnformattedText());
+		SendMessage.sendMessage(builder.build());
+		}
 	}
 	}
 	

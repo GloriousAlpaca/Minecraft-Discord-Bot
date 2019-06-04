@@ -9,7 +9,7 @@ public class GuildReadyListener extends ListenerAdapter {
     public void onGuildReady(GuildReadyEvent event) {
 
         ReferenceClass.guild = event.getGuild();
-
+        ReferenceClass.defaultchannelid = event.getGuild().getDefaultChannel().getId();
     }
 }
 

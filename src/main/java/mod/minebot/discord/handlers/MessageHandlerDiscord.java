@@ -13,15 +13,15 @@ public class MessageHandlerDiscord {
         String message = event.getMessage().getContentRaw();
 
 
-        if(message.contains("<@")&&message.contains(MinebotConfig.discord.clientid+">")&&message.contains("setdefaultchannel")){
+        if(message.contains("<@")&&message.contains(MinebotConfig.discord.clientid+">")&&message.contains("setdefault")){
             if(event.getMember()==event.getGuild().getOwner()){
-                if(TChannel.getId()==ReferenceClass.MessageChannelID){
+                if(TChannel.getId()==ReferenceClass.defaultchannelid){
 
                     SendMessage.sendMessage("The channel "+event.getTextChannel().getName()+" is already the default channel");
                 }
                 else {
                     ReferenceClass.ChatChannelID = event.getTextChannel().getId();
-                    ReferenceClass.MessageChannelID = event.getTextChannel().getId();
+                    ReferenceClass.defaultchannelid = event.getTextChannel().getId();
                     ReferenceClass.GuildID = event.getGuild().getId();
                     SendMessage.sendMessage("The channel " + event.getTextChannel().getName() + " was set as your default channel :)");
                 }
