@@ -39,7 +39,7 @@ public class MINEBOT {
     public static IProxy proxy;
     
     /*Creative Tab*/
-    public static final CreativeTabs CT = new CreativeTabs("LEER") {
+    public static final CreativeTabs CT = new CreativeTabs("Minebot") {
     	
     	@Override
     	public ItemStack getTabIconItem() {

@@ -67,9 +67,11 @@ public class EventHandler {
 	@SubscribeEvent
     public void playerConnecting(PlayerEvent.PlayerLoggedInEvent event){
 		String playername = event.player.getName();
-		String message = (playername+" is connecting to the server.");
-		//Discordbot sendet String
-		SendMessage.sendMessage(message);
+		EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(55040);
+		builder.setDescription(playername+" has connected to the server!");
+		//Discordbot sendet Message
+		SendMessage.sendMessage(builder.build());
 	}
 	}
 	
@@ -83,9 +85,11 @@ public class EventHandler {
 	@SubscribeEvent
     public void playerDisconnecting(PlayerEvent.PlayerLoggedOutEvent event){
 		String playername = event.player.getName();
-		String message = (playername+" has disconnected from the server.");
-		//Discordbot sendet String
-		SendMessage.sendMessage(message);
+		EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(16711680);
+		builder.setDescription(playername+" has disconnected from the server!");
+		//Discordbot sendet Message
+		SendMessage.sendMessage(builder.build());
 	}
 	}
 	
@@ -100,9 +104,11 @@ public class EventHandler {
 	public void changeDimension(PlayerEvent.PlayerChangedDimensionEvent event){
 		String playername = event.player.getName();
 		DimensionType dimension = DimensionManager.getProviderType(event.toDim);
-		String message = (playername+" has traveled to "+dimension.getName());
+		EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(14876927);
+		builder.setDescription(playername+" has traveled to "+dimension.getName());
 		//Discordbot sendet String
-		SendMessage.sendMessage(message);
+		SendMessage.sendMessage(builder.build());
 	}
 	}
 	
@@ -118,8 +124,13 @@ public class EventHandler {
 		String username = event.getUsername();
 		String chat = event.getMessage();
 		String message = ("Message by "+username+": "+chat);
+		EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(13158600);
+		builder.setAuthor("Chatmessage: ");
+		builder.setTitle(username);
+		builder.setDescription(chat);
 		//Discordbot sendet String
-		SendMessage.sendMessage(message);
+		SendMessage.sendMessage(builder.build());
 	}
 	}
 	
@@ -208,11 +219,12 @@ public class EventHandler {
 	{
 		DisplayInfo display = event.getAdvancement().getDisplay();	
 		String player = event.getEntityPlayer().getDisplayNameString();
+		if(display!=null)
 		if(!display.isHidden()) {
 		EmbedBuilder builder = new EmbedBuilder();
 		builder.setColor(16766720);
-		builder.setAuthor(player);
-		builder.setTitle(display.getTitle().getUnformattedText());
+		builder.setAuthor(player+" has gotten an Advancement:");
+		builder.setTitle("["+display.getTitle().getUnformattedText()+"]");
 		builder.setDescription(display.getDescription().getUnformattedText());
 		SendMessage.sendMessage(builder.build());
 		}
