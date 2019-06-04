@@ -67,8 +67,14 @@ public class Reader {
                 LOG.info("IO Error");
             }
 
+            if(search=="nichts"){
+                return null;
+            }
+            else{
+                return search;
+            }
 
-            return search;
+
         }
     }
 }

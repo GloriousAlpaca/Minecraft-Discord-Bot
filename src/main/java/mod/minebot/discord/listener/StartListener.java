@@ -11,7 +11,14 @@ public class StartListener extends ListenerAdapter {
     public void onReady(ReadyEvent event){
 
             event.getJDA().getGuildById(ReferenceClass.GuildID).getTextChannelById(ReferenceClass.defaultchannelid).sendMessage("Bot Gestartet");
-            ReferenceClass.defaultchannelid= Reader.readfromfile("defaultchannel");
+            if(Reader.readfromfile("defaultchannel")==null){
+
+                ReferenceClass.defaultchannelid = event.getJDA().getGuildById(ReferenceClass.GuildID).getDefaultChannel().getId();
+            }
+            else{
+                ReferenceClass.defaultchannelid = Reader.readfromfile("defaultchannel");
+            }
+
 
     }
 
