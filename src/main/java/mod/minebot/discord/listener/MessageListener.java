@@ -23,7 +23,6 @@ public class MessageListener extends ListenerAdapter {
             }
             else{
                 event.getTextChannel().sendMessage("You do not have the required permissions! >:(").queue();
-                event.getTextChannel().sendMessage(ReferenceClass.guild.getId()).queue();
 
             }
 
