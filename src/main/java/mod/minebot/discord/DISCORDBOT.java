@@ -2,7 +2,7 @@ package mod.minebot.discord;
 
 import javax.security.auth.login.LoginException;
 
-
+import mod.minebot.MinebotConfig;
 import mod.minebot.discord.listener.GuildReadyListener;
 import mod.minebot.discord.listener.MessageListener;
 import mod.minebot.discord.listener.StartListener;
@@ -16,7 +16,7 @@ public class DISCORDBOT {
 
 		JDABuilder builder = new JDABuilder();
 
-		builder.setToken(ReferenceClass.TOKEN);
+		builder.setToken(MinebotConfig.discord.token);
 		builder.setAutoReconnect(true);
 		builder.setStatus(OnlineStatus.ONLINE);
 		builder.setGame(Game.playing((ReferenceClass.InitialGame)));

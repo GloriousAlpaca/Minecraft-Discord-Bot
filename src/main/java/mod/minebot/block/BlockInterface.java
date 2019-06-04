@@ -1,18 +1,32 @@
 package mod.minebot.block;
 
-import org.lwjgl.util.Color;
+import javax.annotation.Nullable;
 
+import mod.minebot.MINEBOT;
+import mod.minebot.tileentity.TileEntityInterface;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockInterface extends Block{
 
+	public TileEntityInterface entity;
+	
 	public BlockInterface() {
 		super(Material.IRON,MapColor.STONE);
+		setUnlocalizedName("minebot.dcinterface");
+		setRegistryName("dcinterface");
+		setCreativeTab(MINEBOT.CT);
+		setHardness(3f);
+		setResistance(15f);
+		setHarvestLevel("pickaxe", 0);
+		
 	}
 	
 	/**
@@ -28,4 +42,32 @@ public class BlockInterface extends Block{
         }
     }
     
+    public Class<TileEntityInterface> getTileEntityClass() {
+    	return TileEntityInterface.class;
+    }
+	
+	public TileEntityInterface getTileEntity(IBlockAccess world, BlockPos pos) {
+		return (TileEntityInterface)world.getTileEntity(pos);
+	}
+	
+	@Override
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
+	}
+	
+	@Nullable
+	@Override
+	public TileEntityInterface createTileEntity(World world, IBlockState state) {
+		entity = new TileEntityInterface();
+		return entity;
+		
+	}
+	
+	public void registerItemModel(Item itemBlock) {
+		MINEBOT.proxy.registerItemRenderer(itemBlock, 0, "dcinterface");
+	}
+	
+	public Item createItemBlock() {
+		return new ItemBlock(this).setRegistryName(getRegistryName());
+	}
 }

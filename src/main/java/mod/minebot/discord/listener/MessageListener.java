@@ -1,5 +1,6 @@
 package mod.minebot.discord.listener;
 
+import mod.minebot.MinebotConfig;
 import mod.minebot.discord.ReferenceClass;
 import mod.minebot.discord.SendMessage;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -10,7 +11,7 @@ public class MessageListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
 
 
-        if (event.getMessage().getContentRaw().contains("<@"+ReferenceClass.ID+">")&&event.getMessage().getContentStripped().contains("setdefaultchannel")) {
+        if (event.getMessage().getContentRaw().contains("<@"+MinebotConfig.discord.clientid+">")&&event.getMessage().getContentStripped().contains("setdefaultchannel")) {
             if(event.getMember()==event.getGuild().getOwner()){
 
                 //ReferenceClass.guild = event.getGuild();
