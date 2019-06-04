@@ -140,13 +140,19 @@ public class EventHandler {
 	
 	@EventBusSubscriber
 	private class LightningEvent{
+		private Long lasttime=0L;
 	//Blitzschlag Event
 	@SubscribeEvent
 	public void lightning(EntityStruckByLightningEvent event){
+		if(System.currentTimeMillis()-lasttime>10000) {
 		String name = event.getEntity().getName();
-		String message = (name + " has been struck by lightning.");
+		EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(13158650);
+		builder.setDescription(name+" has been struck by lightning!");
 		//Discordbot sendet String
-		SendMessage.sendMessage(message);
+		SendMessage.sendMessage(builder.build());
+		lasttime = System.currentTimeMillis();
+		}
 	}
 	}
 	
@@ -179,12 +185,15 @@ public class EventHandler {
 	public void destroyEvent(PlayerDestroyItemEvent event){
 		ItemStack stack = event.getOriginal();
 		if(stack.hasDisplayName()) {
-                 String name = stack.getDisplayName();
-                 String message = event.getEntityPlayer().getName()+" has destroyed his "+name;
-               //Discordbot sendet String
-                 SendMessage.sendMessage(message);}
+                String name = stack.getDisplayName();
+                EmbedBuilder builder = new EmbedBuilder();
+         		builder.setColor(16737792);
+         		builder.setDescription(event.getEntityPlayer().getName()+" has destroyed his "+name);
+         		//Discordbot sendet String
+         		SendMessage.sendMessage(builder.build());
             }
         }
+	}
 	
 	public ItemDestructionEvent getItemDestructionEvent(){
 		return new ItemDestructionEvent();
