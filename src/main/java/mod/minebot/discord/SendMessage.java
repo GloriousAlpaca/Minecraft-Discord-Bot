@@ -30,6 +30,21 @@ public class SendMessage {
             MINEBOT.LOG.info("DefaultChannelID not set yet");
         }
         else {
+            ReferenceClass.guild.getTextChannelById(ReferenceClass.MessageChannelID).sendMessage(Message).queue();
+        }
+    }
+
+    public static void sendChat(String Message){
+        if(ReferenceClass.guild==null) {
+            MINEBOT.LOG.info("Guild not set yet");
+        }
+        else if(ReferenceClass.GuildID==null){
+            MINEBOT.LOG.info("GuildID not set yet");
+        }
+        else if(ReferenceClass.MessageChannelID==null){
+            MINEBOT.LOG.info("DefaultChannelID not set yet");
+        }
+        else {
             ReferenceClass.guild.getTextChannelById(ReferenceClass.ChatChannelID).sendMessage(Message).queue();
         }
     }
