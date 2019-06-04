@@ -1,6 +1,8 @@
 package mod.minebot;
 
 import mod.minebot.discord.SendMessage;
+import mod.minebot.discord.handlers.MessageHandlerDiscord;
+import mod.minebot.discord.handlers.MessageHandlerMinecraft;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.DisplayInfo;
@@ -121,6 +123,7 @@ public class EventHandler {
 	//Chatmessage Event
 	@SubscribeEvent
 	public void chatMessage(ServerChatEvent event){
+        MessageHandlerMinecraft.HandleMessage(event);
 		String username = event.getUsername();
 		String chat = event.getMessage();
 		String message = ("Message by "+username+": "+chat);
