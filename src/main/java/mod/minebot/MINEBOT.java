@@ -55,12 +55,12 @@ public class MINEBOT {
     /*Configuration*/
     public static Configuration config;
     
-    @SuppressWarnings("deprecation")
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
     	LOG.info(NAME + " pre-initialization");
     	LOG.info("Starting Bot...");
         config = new Configuration(event.getSuggestedConfigurationFile());
+        if(MinebotConfig.discord.bot)
     	proxy.startBot();
     	EventHandler.register();
 	}

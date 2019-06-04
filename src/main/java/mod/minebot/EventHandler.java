@@ -66,6 +66,7 @@ public class EventHandler {
 		String playername = event.player.getName();
 		String message = (playername+" is connecting to the server.");
 		//Discordbot sendet String
+		SendMessage.sendMessage(message);
 	}
 	}
 	
@@ -81,6 +82,7 @@ public class EventHandler {
 		String playername = event.player.getName();
 		String message = (playername+" has disconnected from the server.");
 		//Discordbot sendet String
+		SendMessage.sendMessage(message);
 	}
 	}
 	
@@ -97,6 +99,7 @@ public class EventHandler {
 		DimensionType dimension = DimensionManager.getProviderType(event.toDim);
 		String message = (playername+" has traveled to "+dimension.getName());
 		//Discordbot sendet String
+		SendMessage.sendMessage(message);
 	}
 	}
 	
@@ -113,7 +116,6 @@ public class EventHandler {
 		String chat = event.getMessage();
 		String message = ("Message by "+username+": "+chat);
 		//Discordbot sendet String
-		MINEBOT.LOG.info(message);
 		SendMessage.sendMessage(message);
 	}
 	}
@@ -128,8 +130,9 @@ public class EventHandler {
 	@SubscribeEvent
 	public void lightning(EntityStruckByLightningEvent event){
 		String name = event.getEntity().getName();
-		String message = (name + "has been struck by lightning.");
+		String message = (name + " has been struck by lightning.");
 		//Discordbot sendet String
+		SendMessage.sendMessage(message);
 	}
 	}
 	
@@ -169,6 +172,7 @@ public class EventHandler {
                  String name = nbt.getString("Name");
                  String message = event.getEntityPlayer().getName()+" has destroyed his "+name;
                //Discordbot sendet String
+                 SendMessage.sendMessage(message);
             }
         }
 	}
@@ -207,7 +211,7 @@ public class EventHandler {
 	{
 		String advancement = event.getAdvancement().getDisplayText().getUnformattedText();
 		String player = event.getEntityPlayer().getDisplayNameString();
-		String message = player + " has gotten the Advancement: "+advancement;
+		String message = player + " has gotten the Advancement: **"+advancement+"**";
 		SendMessage.sendMessage(message);
 	}
 	}
