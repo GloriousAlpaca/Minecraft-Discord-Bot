@@ -1,5 +1,6 @@
 package mod.minebot;
 
+import mod.minebot.discord.ReferenceClass;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -61,6 +62,7 @@ public class MINEBOT {
     	LOG.info(NAME + " pre-initialization");
     	LOG.info("Starting Bot...");
         config = new Configuration(event.getSuggestedConfigurationFile());
+        ReferenceClass.defaultconfig=event.getSuggestedConfigurationFile().getPath();
         if(MinebotConfig.discord.bot)
     	proxy.startBot();
     	EventHandler.register();

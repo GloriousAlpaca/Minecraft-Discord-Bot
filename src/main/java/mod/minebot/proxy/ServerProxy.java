@@ -30,7 +30,6 @@ public class ServerProxy implements IProxy{
 		try {
 			new DISCORDBOT(null);
 		} catch (LoginException e) {
-			
 			e.printStackTrace();
 		}
 	}

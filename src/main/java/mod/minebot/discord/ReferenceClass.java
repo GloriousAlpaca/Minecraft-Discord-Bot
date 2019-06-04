@@ -11,4 +11,5 @@ public class ReferenceClass {
     public static String defaultchannelid;
     public static Guild guild;
     public static JDA main;
+    public static String defaultconfig;
 }
