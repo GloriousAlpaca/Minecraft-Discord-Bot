@@ -13,9 +13,12 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 public class BlockInterface extends Block{
-
+	
+	@ObjectHolder(value = "minebot:dcinterface")
+	public final static BlockInterface dcinterface=null;
 	public TileEntityInterface entity;
 	
 	public BlockInterface() {

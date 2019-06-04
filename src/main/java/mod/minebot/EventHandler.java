@@ -8,6 +8,7 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
@@ -170,10 +171,17 @@ public class EventHandler {
 	public void death(LivingDeathEvent event){
 		Entity entity = event.getEntity();
 		EntityLivingBase live = event.getEntityLiving();
-		if(entity instanceof EntityLivingBase) {
-		String deathmessage = event.getSource().getDeathMessage((EntityLivingBase) entity).getUnformattedText();}
+		if(entity instanceof EntityPlayer) {
+		String deathmessage = event.getSource().getDeathMessage((EntityLivingBase) entity).getUnformattedText();
 		String message = ("");
 		//Discordbot sendet String
+		EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(0);
+		builder.setAuthor("Death:");
+		builder.setTitle(entity.getName());
+		builder.setDescription(deathmessage);
+		//Discordbot sendet String
+		SendMessage.sendMessage(builder.build());}
 	}
 	}
 	

@@ -1,0 +1,21 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"facing=east": {
+			"model": "minebot:dcinterface"
+		},
+		"facing=south": {
+			"model": "minebot:dcinterface", "y": 90 
+		},
+		"facing=west": {
+			"model": "minebot:dcinterface", "y": 180 
+		},
+		"facing=north": {
+			"model": "minebot:dcinterface", "y": 270 
+		},
+		"inventory": {
+			"model": "minebot:dcinterface",
+			"transform": "forge:default-block"
+		}
+	}
+}
