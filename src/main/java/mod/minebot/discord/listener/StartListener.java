@@ -1,6 +1,7 @@
 package mod.minebot.discord.listener;
 
 import mod.minebot.discord.ReferenceClass;
+import mod.minebot.discord.persistance.Reader;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -9,9 +10,8 @@ public class StartListener extends ListenerAdapter {
 
     public void onReady(ReadyEvent event){
 
-
-
             event.getJDA().getGuildById(ReferenceClass.GuildID).getTextChannelById(ReferenceClass.defaultchannelid).sendMessage("Bot Gestartet");
+            ReferenceClass.defaultchannelid= Reader.readfromfile("defaultchannel");
 
     }
 

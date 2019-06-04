@@ -3,6 +3,7 @@ package mod.minebot.discord.handlers;
 import mod.minebot.MinebotConfig;
 import mod.minebot.discord.ReferenceClass;
 import mod.minebot.discord.SendMessage;
+import mod.minebot.discord.persistance.Writer;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -29,6 +30,7 @@ public class MessageHandlerDiscord {
             }
             else{
                 event.getTextChannel().sendMessage("You do not have the required permissions! >:(").queue();
+                Writer.writetofile("Dekuman",null);
 
             }
 

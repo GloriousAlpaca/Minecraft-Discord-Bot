@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class MessageListener extends ListenerAdapter {
 
     public void onMessageReceived(MessageReceivedEvent event) {
-        Reader.readfromfile(null,null);
+
 
 
         MessageHandlerDiscord.HandleMessage(event);
