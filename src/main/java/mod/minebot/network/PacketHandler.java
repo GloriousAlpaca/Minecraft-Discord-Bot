@@ -1,8 +1,5 @@
 package mod.minebot.network;
 
-
-
-
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,7 +16,7 @@ public class PacketHandler {
 		INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(channelName);
 		
 		//Registriere Server Packets
-
+		INSTANCE.registerMessage(InterfacetoTileMessage.Handler.class, InterfacetoTileMessage.class, nextID(), Side.SERVER);
 		//Registriere Client Packets
 
 	}

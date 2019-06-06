@@ -49,7 +49,11 @@ public class BlockInterface extends Block{
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote) {
-			player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());
+			if(tile.secure) {
+				if(player.getUniqueID()==tile.UUID)
+				player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());}
+			else
+				player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
@@ -65,6 +69,14 @@ public class BlockInterface extends Block{
         {
            
         }
+    }
+    
+    public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EnumFacing side)
+    {
+        if(side != state.getValue(FACING).getOpposite()) {
+        	return true;
+        }
+        return false;
     }
     
     public Class<TileEntityInterface> getTileEntityClass() {

@@ -1,16 +1,13 @@
 package mod.minebot;
 
 import mod.minebot.discord.SendMessage;
-import mod.minebot.discord.handlers.MessageHandlerDiscord;
 import mod.minebot.discord.handlers.MessageHandlerMinecraft;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,7 +16,6 @@ import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AdvancementEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -27,6 +23,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class EventHandler {
 	
+	@SuppressWarnings("deprecation")
 	public static void register() {
 		EventHandler eventhandler = new EventHandler();
 		if(MinebotConfig.events.connect) {
@@ -127,7 +124,6 @@ public class EventHandler {
         MessageHandlerMinecraft.HandleMessage(event);
 		String username = event.getUsername();
 		String chat = event.getMessage();
-		String message = ("Message by "+username+": "+chat);
 		EmbedBuilder builder = new EmbedBuilder();
 		builder.setColor(13158600);
 		builder.setAuthor("Chatmessage: ");
