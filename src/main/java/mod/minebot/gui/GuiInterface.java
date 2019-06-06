@@ -11,6 +11,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.math.BlockPos;
 
 public class GuiInterface extends GuiScreen{
 	
@@ -75,12 +76,11 @@ public class GuiInterface extends GuiScreen{
         	this.secureBtn.displayString = "minebot.button.notsecure";
         this.sender = initsender;
         this.secure = initsecure;
-        System.out.println("TEST1");
+        System.out.println("Init");
     }
     
     public void updateGui()
     {
-    	System.out.println("TEST2");
         this.doneBtn.enabled = true;
         this.modeBtn.enabled = true;
         this.secureBtn.enabled = true;
@@ -155,12 +155,12 @@ public class GuiInterface extends GuiScreen{
             //Done Button
             else if (button.id == 0)
             {
-            	String t;
-            	if(messageTextField == null)
-            		t = "";
-            	else
-            		t = messageTextField.getText();
-            	PacketHandler.INSTANCE.sendToServer(new InterfacetoTileMessage(te.getPos(), messageTextField.getText(), sender, secure));
+            	PacketHandler.INSTANCE.sendToServer(
+            			new InterfacetoTileMessage(
+            					te.getPos(),
+            					messageTextField.getText(), 
+            					sender, 
+            					secure ));
                 this.mc.displayGuiScreen((GuiScreen)null);
             }
             //Mode Button

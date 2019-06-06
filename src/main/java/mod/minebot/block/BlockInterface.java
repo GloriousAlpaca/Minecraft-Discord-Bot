@@ -51,11 +51,13 @@ public class BlockInterface extends Block{
 		if(!world.isRemote) {
 			if(tile.secure) {
 				if(player.getUniqueID()==tile.UUID)
-				player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());}
+				player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());
+				return true;}
 			else
 				player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	/**

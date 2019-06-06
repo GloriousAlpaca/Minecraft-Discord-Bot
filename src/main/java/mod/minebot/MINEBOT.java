@@ -3,6 +3,7 @@ package mod.minebot;
 import mod.minebot.block.BlockInterface;
 import mod.minebot.discord.ReferenceClass;
 import mod.minebot.minecraftcommands.RegisterPlayer;
+import mod.minebot.network.PacketHandler;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -72,6 +73,7 @@ public class MINEBOT {
         if(MinebotConfig.discord.bot)
     	proxy.startBot();
     	EventHandler.register();
+    	PacketHandler.registerMessages(MODID);
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 	}
 	
