@@ -2,8 +2,8 @@ package mod.minebot.discord.tasks;
 
 import mod.minebot.discord.ReferenceClass;
 import mod.minebot.discord.SendMessage;
-import mod.minebot.discord.persistance.Reader;
-import mod.minebot.discord.persistance.Writer;
+import mod.minebot.discord.persistence.Reader;
+import mod.minebot.discord.persistence.Writer;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 

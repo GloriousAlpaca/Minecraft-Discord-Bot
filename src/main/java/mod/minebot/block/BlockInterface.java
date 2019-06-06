@@ -3,22 +3,36 @@ package mod.minebot.block;
 import javax.annotation.Nullable;
 
 import mod.minebot.MINEBOT;
+import mod.minebot.gui.GuiHandler;
 import mod.minebot.tileentity.TileEntityInterface;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 public class BlockInterface extends Block{
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	
 	@ObjectHolder(value = "minebot:dcinterface")
 	public final static BlockInterface dcinterface=null;
+	
+	@ObjectHolder(value = "minebot:dcinterface")
+	public final static Item itemdcinterface=null;
+	
 	public TileEntityInterface entity;
 	
 	public BlockInterface() {
@@ -29,7 +43,15 @@ public class BlockInterface extends Block{
 		setHardness(3f);
 		setResistance(15f);
 		setHarvestLevel("pickaxe", 0);
-		
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+	}
+    
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if(!world.isRemote) {
+			player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());
+		}
+		return true;
 	}
 	
 	/**
@@ -73,4 +95,38 @@ public class BlockInterface extends Block{
 	public Item createItemBlock() {
 		return new ItemBlock(this).setRegistryName(getRegistryName());
 	}
+	
+	@Override
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
+    	 world.setBlockState(pos, state.withProperty(FACING, entity.getHorizontalFacing().getOpposite()), 2);
+    }
+	
+	@Override
+    public BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
+    }
+	
+	/**
+     * Convert the given metadata into a BlockState for this Block
+     */
+    public IBlockState getStateFromMeta(int meta)
+    {
+        EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+        {
+            enumfacing = EnumFacing.NORTH;
+        }
+
+        return this.getDefaultState().withProperty(FACING, enumfacing);
+    }
+
+    /**
+     * Convert the BlockState into the correct metadata value
+     */
+    public int getMetaFromState(IBlockState state)
+    {
+        return ((EnumFacing)state.getValue(FACING)).getIndex();
+    }
+    
 }

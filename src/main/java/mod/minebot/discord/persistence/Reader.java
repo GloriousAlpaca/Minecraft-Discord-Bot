@@ -1,4 +1,4 @@
-package mod.minebot.discord.persistance;
+package mod.minebot.discord.persistence;
 
 import mod.minebot.discord.ReferenceClass;
 import mod.minebot.discord.SendMessage;
