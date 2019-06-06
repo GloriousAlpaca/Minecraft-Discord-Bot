@@ -33,7 +33,7 @@ public class BlockInterface extends Block{
 	@ObjectHolder(value = "minebot:dcinterface")
 	public final static Item itemdcinterface=null;
 	
-	public TileEntityInterface entity;
+	public TileEntityInterface tile;
 	
 	public BlockInterface() {
 		super(Material.IRON,MapColor.STONE);
@@ -83,8 +83,8 @@ public class BlockInterface extends Block{
 	@Nullable
 	@Override
 	public TileEntityInterface createTileEntity(World world, IBlockState state) {
-		entity = new TileEntityInterface();
-		return entity;
+		tile = new TileEntityInterface();
+		return tile;
 		
 	}
 	
