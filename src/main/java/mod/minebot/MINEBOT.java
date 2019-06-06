@@ -2,9 +2,8 @@ package mod.minebot;
 
 import mod.minebot.block.BlockInterface;
 import mod.minebot.discord.ReferenceClass;
-import mod.minebot.minecraftcommands.CommandRegister;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import mod.minebot.minecraftcommands.RegisterPlayer;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -74,9 +73,14 @@ public class MINEBOT {
     	proxy.startBot();
     	EventHandler.register();
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-        FMLCommonHandler.instance().bus().register(new CommandRegister());
+
 
 	}
+	@Mod.EventHandler
+    public void registercommand(FMLServerStartingEvent event){
+        event.registerServerCommand(new RegisterPlayer());
+
+    }
     
     @Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
