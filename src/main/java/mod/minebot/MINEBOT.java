@@ -2,6 +2,8 @@ package mod.minebot;
 
 import mod.minebot.block.BlockInterface;
 import mod.minebot.discord.ReferenceClass;
+import mod.minebot.minecraftcommands.CommandRegister;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -71,6 +73,8 @@ public class MINEBOT {
     	proxy.startBot();
     	EventHandler.register();
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+    	MinecraftForge.EVENT_BUS.register(new CommandRegister());
+
 	}
     
     @Mod.EventHandler
