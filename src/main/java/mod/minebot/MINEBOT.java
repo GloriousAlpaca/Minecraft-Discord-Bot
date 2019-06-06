@@ -74,7 +74,6 @@ public class MINEBOT {
     	proxy.startBot();
     	EventHandler.register();
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-        FMLCommonHandler.instance().bus().register(new CommandRegister());
 
 	}
     

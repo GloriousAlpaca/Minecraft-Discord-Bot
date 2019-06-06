@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class CommandRegister {
 
-    @SubscribeEvent
+    @Mod.EventHandler
     public void registercommands(FMLServerStartingEvent event){
         event.registerServerCommand(new RegisterPlayer());
 

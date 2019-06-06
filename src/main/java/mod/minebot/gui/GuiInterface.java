@@ -155,20 +155,25 @@ public class GuiInterface extends GuiScreen{
             //Done Button
             else if (button.id == 0)
             {
-            	System.out.println(messageTextField.getText());
+            	String t;
+            	if(messageTextField == null)
+            		t = "";
+            	else
+            		t = messageTextField.getText();
             	PacketHandler.INSTANCE.sendToServer(new InterfacetoTileMessage(te.getPos(), messageTextField.getText(), sender, secure));
                 this.mc.displayGuiScreen((GuiScreen)null);
             }
             //Mode Button
             else if (button.id == 2)
             {
+            	System.out.println("SENDER: "+sender);
             	if(sender) {
             		sender=false;
             		button.displayString = "minebot.button.receiver";
             	}
             	else
             		sender = true;
-            	button.displayString = "minebot.button.sender";
+            		button.displayString = "minebot.button.sender";
             }
             //Security Button
             else if (button.id == 4)
