@@ -5,15 +5,13 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityInterface extends TileEntity{
 
-	public boolean secure;
+	public boolean secure=false;
 	public java.util.UUID UUID = java.util.UUID.randomUUID();
 	public String text="";
-	public boolean sender;
+	public boolean sender=true;
 	
 	
 	public TileEntityInterface() {
-		secure=false;
-		sender=true;
 	}
 	
 	

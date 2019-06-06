@@ -2,10 +2,11 @@ package mod.minebot.gui;
 
 import java.io.IOException;
 import org.lwjgl.input.Keyboard;
+
+import mod.minebot.network.InterfaceMessage;
 import mod.minebot.network.InterfacetoTileMessage;
 import mod.minebot.network.PacketHandler;
 import mod.minebot.tileentity.TileEntityInterface;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -15,20 +16,22 @@ public class GuiInterface extends GuiScreen{
 	
     private final TileEntityInterface te;
     /*Textfelder*/
-    private GuiTextField messageTextField;
+    GuiTextField messageTextField;
     /*Buttons*/
     private GuiButton doneBtn;
     private GuiButton cancelBtn;
     private GuiButton modeBtn;
     private GuiButton secureBtn;
     /*Variablen*/
-    boolean secure;
-    boolean sender;
+    public static boolean initsecure;
+    public static boolean initsender;
+    public static String inittext;
+    
+    private boolean secure;
+    private boolean sender;
     
     public GuiInterface(TileEntityInterface tileentity) {
     	this.te = tileentity;
-    	secure = te.secure;
-    	sender = te.sender;
     }
     
     /**
@@ -38,6 +41,7 @@ public class GuiInterface extends GuiScreen{
     public void updateScreen()
     {
         this.messageTextField.updateCursorCounter();
+        updateGui();
     }
     
     /**
@@ -51,21 +55,26 @@ public class GuiInterface extends GuiScreen{
         this.buttonList.clear();
         this.doneBtn = this.addButton(new GuiButton(0, this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.done")));
         this.cancelBtn = this.addButton(new GuiButton(1, this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.cancel")));
-        if(sender)
-        	this.modeBtn = this.addButton(new GuiButton(2, this.width / 2 - 50 - 100 - 4, 165, 100, 20, I18n.format("minebot.button.sender")));
-        else
-        	this.modeBtn = this.addButton(new GuiButton(2, this.width / 2 - 50 - 100 - 4, 165, 100, 20, I18n.format("minebot.button.receiver")));
-        if(secure)
-        	this.secureBtn = this.addButton(new GuiButton(4, this.width / 2 , 165, 100, 20, I18n.format("minebot.button.secure")));
-        else
-        	this.secureBtn = this.addButton(new GuiButton(4, this.width / 2 , 165, 100, 20, I18n.format("minebot.button.notsecure")));
+        this.modeBtn = this.addButton(new GuiButton(2, this.width / 2 - 50 - 100 - 4, 165, 100, 20, I18n.format("minebot.button.sender")));
+        this.secureBtn = this.addButton(new GuiButton(4, this.width / 2 , 165, 100, 20, I18n.format("minebot.button.secure")));
         this.messageTextField = new GuiTextField(3, this.fontRenderer, this.width / 2 - 150, 50, 300, 20);
         this.messageTextField.setMaxStringLength(2000);
         this.messageTextField.setFocused(true);
-        this.messageTextField.setText(te.text);
         this.doneBtn.enabled = false;
         this.modeBtn.enabled = false;
         this.secureBtn.enabled = false;
+        PacketHandler.INSTANCE.sendToServer(new InterfaceMessage(te.getPos()));
+        this.messageTextField.setText(inittext);
+        if(initsender)
+        	this.modeBtn.displayString = "minebot.button.sender";
+        else
+        	this.modeBtn.displayString = "minebot.button.receiver";
+        if(initsecure)
+        	this.secureBtn.displayString = "minebot.button.secure";
+        else
+        	this.secureBtn.displayString = "minebot.button.notsecure";
+        this.sender = initsender;
+        this.secure = initsecure;
         System.out.println("TEST1");
     }
     
@@ -146,8 +155,6 @@ public class GuiInterface extends GuiScreen{
             //Done Button
             else if (button.id == 0)
             {
-            	System.out.println(sender);
-            	System.out.println(secure);
             	System.out.println(messageTextField.getText());
             	PacketHandler.INSTANCE.sendToServer(new InterfacetoTileMessage(te.getPos(), messageTextField.getText(), sender, secure));
                 this.mc.displayGuiScreen((GuiScreen)null);
