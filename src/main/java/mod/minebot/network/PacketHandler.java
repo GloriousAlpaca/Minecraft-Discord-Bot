@@ -20,5 +20,6 @@ public class PacketHandler {
 		INSTANCE.registerMessage(InterfaceMessage.Handler.class, InterfaceMessage.class, nextID(), Side.SERVER);
 		//Registriere Client Packets
 		INSTANCE.registerMessage(InterfaceReturnMessage.Handler.class, InterfaceReturnMessage.class, nextID(), Side.CLIENT);
+		INSTANCE.registerMessage(ChatMessage.Handler.class, ChatMessage.class, nextID(), Side.CLIENT);
 	}
 }
