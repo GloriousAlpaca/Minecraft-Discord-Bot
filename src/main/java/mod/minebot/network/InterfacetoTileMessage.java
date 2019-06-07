@@ -81,7 +81,6 @@ public class InterfacetoTileMessage implements IMessage{
 					((TileEntityInterface)te).text = message.text;
 					((TileEntityInterface)te).sender = message.sender;
 					((TileEntityInterface)te).secure = message.secure;
-					((TileEntityInterface)te).UUID = ctx.getServerHandler().player.getUniqueID();
 					
 				}
 			}

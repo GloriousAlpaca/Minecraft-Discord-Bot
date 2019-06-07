@@ -91,7 +91,7 @@ public class MINEBOT {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		LOG.info(NAME + " is done!");
-		SendMessage.sendTestMessage();
+		//SendMessage.sendTestMessage();
 
 	}
 	

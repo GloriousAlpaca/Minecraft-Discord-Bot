@@ -11,7 +11,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.math.BlockPos;
 
 public class GuiInterface extends GuiScreen{
 	
@@ -74,8 +73,8 @@ public class GuiInterface extends GuiScreen{
         	this.secureBtn.displayString = "minebot.button.secure";
         else
         	this.secureBtn.displayString = "minebot.button.notsecure";
-        this.sender = initsender;
-        this.secure = initsecure;
+        sender = initsender;
+        secure = initsecure;
         System.out.println("Init");
     }
     
@@ -168,23 +167,23 @@ public class GuiInterface extends GuiScreen{
             {
             	System.out.println("SENDER: "+sender);
             	if(sender) {
-            		sender=false;
-            		button.displayString = "minebot.button.receiver";
+            		sender = false;
+            		modeBtn.displayString = "minebot.button.receiver";
             	}
             	else
             		sender = true;
-            		button.displayString = "minebot.button.sender";
+            		modeBtn.displayString = "minebot.button.sender";
             }
             //Security Button
             else if (button.id == 4)
             {
             	if(secure) {
             		secure=false;
-            		button.displayString = "minebot.button.notsecure";
+            		secureBtn.displayString = "minebot.button.notsecure";
             	}
             	else
             		secure = true;
-            	button.displayString = "minebot.button.secure";
+            		secureBtn.displayString = "minebot.button.secure";
             }
         }
     }

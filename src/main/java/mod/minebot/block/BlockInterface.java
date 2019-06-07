@@ -49,27 +49,31 @@ public class BlockInterface extends Block{
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote) {
-			if(tile.secure) {
-				if(player.getUniqueID()==tile.UUID)
 				player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());
-				return true;}
-			else
-				player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());
-			return true;
 		}
-		return false;
+		return true;
 	}
+	
+	public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player)
+    {
+		if(player.getUniqueID()==tile.UUID && tile.secure)
+			return net.minecraftforge.common.ForgeHooks.canHarvestBlock(this, player, world, pos);
+		else
+			return false;
+    }
 	
 	/**
      * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor
      * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
      * block, etc.
      */
+	@Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
+    	if(!worldIn.isRemote)
         if (worldIn.isBlockPowered(pos))
         {
-           
+        	tile.sendToServer();
         }
     }
     
@@ -113,6 +117,7 @@ public class BlockInterface extends Block{
 	@Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
     	 world.setBlockState(pos, state.withProperty(FACING, entity.getHorizontalFacing().getOpposite()), 2);
+    	 tile.UUID = entity.getUniqueID();
     }
 	
 	@Override
