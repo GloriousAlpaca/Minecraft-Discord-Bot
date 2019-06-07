@@ -22,9 +22,23 @@ public class RegisterPlayer extends CommandBase {
     }
 
     @Override
+    public boolean checkPermission(MinecraftServer server, ICommandSender sender)
+    {
+        return true;
+    }
+
+    @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        Writer.writetofile(sender.getName(),args[0]);
+
+        if(args.length==0){
+            PacketHandler.INSTANCE.sendTo(new ChatMessage("haha"), (EntityPlayerMP) sender.getCommandSenderEntity());
+        }
+        else{
+            Writer.writetofile(sender.getName(),args[0]);
+            System.out.println(sender.getCommandSenderEntity().getUniqueID());
+
+        }
         
-        PacketHandler.INSTANCE.sendTo(new ChatMessage("test"), (EntityPlayerMP) sender.getCommandSenderEntity());
+
     }
 }
