@@ -1,5 +1,7 @@
 package mod.minebot.tileentity;
 
+import java.util.Random;
+
 import mod.minebot.discord.SendMessage;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +14,7 @@ public class TileEntityInterface extends TileEntity{
 	public String text="";
 	public boolean sender=true;
 	private Long lasttime=0L;
+	public int test = new Random().nextInt();
 	
 		public TileEntityInterface() {
 		}

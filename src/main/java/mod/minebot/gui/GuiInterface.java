@@ -1,6 +1,8 @@
 package mod.minebot.gui;
 
 import java.io.IOException;
+import java.util.Random;
+
 import org.lwjgl.input.Keyboard;
 
 import mod.minebot.network.InterfaceMessage;
@@ -32,6 +34,7 @@ public class GuiInterface extends GuiScreen{
     
     public GuiInterface(TileEntityInterface tileentity) {
     	this.te = tileentity;
+    	
     }
     
     /**
@@ -75,7 +78,7 @@ public class GuiInterface extends GuiScreen{
         	this.secureBtn.displayString = "minebot.button.notsecure";
         sender = initsender;
         secure = initsecure;
-        System.out.println("Init");
+        System.out.println("Tile Entity: "+te.test);
     }
     
     public void updateGui()
@@ -83,6 +86,8 @@ public class GuiInterface extends GuiScreen{
         this.doneBtn.enabled = true;
         this.modeBtn.enabled = true;
         this.secureBtn.enabled = true;
+        updateSecure();
+        updateMode();
     }
     
     /**
@@ -168,24 +173,37 @@ public class GuiInterface extends GuiScreen{
             	System.out.println("SENDER: "+sender);
             	if(sender) {
             		sender = false;
-            		modeBtn.displayString = "minebot.button.receiver";
             	}
             	else
             		sender = true;
-            		modeBtn.displayString = "minebot.button.sender";
+            		updateMode();
             }
             //Security Button
             else if (button.id == 4)
             {
             	if(secure) {
             		secure=false;
-            		secureBtn.displayString = "minebot.button.notsecure";
             	}
             	else
             		secure = true;
-            		secureBtn.displayString = "minebot.button.secure";
+            	updateSecure();
             }
         }
     }
     
+    public void updateSecure() {
+    	if(secure) {
+    		this.secureBtn.displayString = I18n.format("minebot.button.notsecure");
+    	}
+    	else
+    		this.secureBtn.displayString = I18n.format("minebot.button.secure");
+    }
+    
+    public void updateMode() {
+    	if(sender) {
+    		this.modeBtn.displayString = I18n.format("minebot.button.receiver");
+    	}
+    	else
+    		this.modeBtn.displayString = I18n.format("minebot.button.sender");
+    }
 }
