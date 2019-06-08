@@ -31,7 +31,6 @@ public class PlayerStatistics {
             if(argument.contains("d-")){
                 String argumentparsed = argument.replace("d-","");
                 id = UUID.fromString(Reader.readfromfile(argumentparsed));
-
             }
             else {
                 id = server.getPlayerList().getPlayerByUsername(argument).getUniqueID();
@@ -46,11 +45,10 @@ public class PlayerStatistics {
                 
                 File file1 = new File(server.getWorld(0).getSaveHandler().getWorldDirectory(), "stats");
                 File file2 = new File(file1, id + ".json");
-                
                 StatisticsManagerServer stat = new StatisticsManagerServer(server, file2);
                 EmbedBuilder builder = new EmbedBuilder();
         		builder.setColor(13158650);
-        		builder.setAuthor(player.getName());
+        		builder.setAuthor(server.getPlayerProfileCache().getProfileByUUID(id).getName());
         		builder.setTitle((Arrays.asList(server.getOnlinePlayerProfiles()).contains(server.getPlayerProfileCache().getProfileByUUID(id))) ? "Online":"Offline");
         		builder.setDescription("Time Played: "+stat.readStat(StatList.PLAY_ONE_MINUTE)/1000+" minutes");
         		builder.appendDescription("\nDamage dealt: "+stat.readStat(StatList.DAMAGE_DEALT));
