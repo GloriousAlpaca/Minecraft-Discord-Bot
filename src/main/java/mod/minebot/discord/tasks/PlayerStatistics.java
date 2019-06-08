@@ -24,7 +24,7 @@ public class PlayerStatistics {
         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         EntityPlayerMP player = null;
         if(ReferenceClass.guild.getMemberById(argument)==null){
-            UUID id = UUID.fromString(Reader.readfromfile(argument));
+            UUID id = server.getPlayerProfileCache().getGameProfileForUsername(Reader.readfromfile(argument)).getId();
             player = server.getPlayerList().getPlayerByUUID(id);
         }
         else {
