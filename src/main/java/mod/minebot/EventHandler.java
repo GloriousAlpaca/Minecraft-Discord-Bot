@@ -7,7 +7,11 @@ import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatBase;
+import net.minecraft.stats.StatList;
+import net.minecraft.stats.StatisticsManager;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -175,7 +179,18 @@ public class EventHandler {
 		builder.setAuthor("Death:");
 		builder.setTitle(entity.getName());
 		builder.setDescription(deathmessage);
-		//builder.appendDescription("*Deathcount: "+0+"*");
+		if(entity instanceof EntityPlayerMP) {
+			float c = ((EntityPlayerMP) entity).getStatFile().readStat(StatList.DEATHS)+1;
+			float t = ((EntityPlayerMP) entity).getStatFile().readStat(StatList.TIME_SINCE_DEATH);
+			t = t/1000;
+			String time = " minutes";
+			if(t>=60) {
+				t=t/60;
+				time = " hours";
+				}
+		builder.appendDescription("\n*Deathcount: "+c+"*");
+		builder.appendDescription("\n*Time since last Death: "+t+time+"*");}
+		
 		//Discordbot sendet String
 		SendMessage.sendMessage(builder.build());}
 	}

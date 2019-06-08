@@ -136,10 +136,11 @@ public class BlockInterface extends Block{
 	
 	@Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
+		if(!world.isRemote) {
     	 world.setBlockState(pos, state.withProperty(FACING, entity.getHorizontalFacing().getOpposite()), 2);
     	 TileEntityInterface tile = (TileEntityInterface) world.getTileEntity(pos);
     	 if(entity instanceof EntityPlayer)
-    	 tile.UUID = entity.getUniqueID();
+    	 tile.UUID = entity.getUniqueID();}
     }
 	
 	@Override

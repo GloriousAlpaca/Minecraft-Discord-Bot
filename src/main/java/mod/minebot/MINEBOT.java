@@ -74,9 +74,9 @@ public class MINEBOT {
 	}
 	
 	@Mod.EventHandler
-    public void registercommand(FMLServerStartingEvent event){
+    public void registerCommand(FMLServerStartingEvent event){
         event.registerServerCommand(new RegisterPlayer());
-
+        
     }
     
     @Mod.EventHandler
