@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 
+import mod.minebot.discord.ReferenceClass;
 import mod.minebot.discord.SendMessage;
 import mod.minebot.discord.persistence.Reader;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -18,11 +19,20 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class PlayerStatistics {
 
-    public static void showstatistics(MessageReceivedEvent event, String discordid){
+    public static void showstatistics(MessageReceivedEvent event, String argument){
 
-        UUID id = UUID.fromString(Reader.readfromfile(discordid));
         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-        EntityPlayerMP player = server.getPlayerList().getPlayerByUUID(id);
+        EntityPlayerMP player = null;
+        if(ReferenceClass.guild.getMemberById(argument)==null){
+            UUID id = UUID.fromString(Reader.readfromfile(argument));
+            player = server.getPlayerList().getPlayerByUUID(id);
+        }
+        else {
+            player = server.getPlayerList().getPlayerByUsername(argument);
+        }
+
+        UUID id = player.getUniqueID();
+
         StatisticsManagerServer stat = player.getStatFile();
         EmbedBuilder builder = new EmbedBuilder();
 		builder.setColor(13158650);

@@ -2,6 +2,8 @@ package mod.minebot.discord.handlers;
 
 import mod.minebot.MinebotConfig;
 import mod.minebot.discord.ReferenceClass;
+import mod.minebot.discord.tasks.CommandHelperDiscord;
+import mod.minebot.discord.tasks.CommandHelperDiscordPrivate;
 import mod.minebot.discord.tasks.registerName;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 
@@ -28,8 +30,13 @@ public class MessageHandlerDiscordPrivate {
                 registerName.unregister(event,2);
 
             }
+            else if(event.getMessage().getContentDisplay().contains("-help")){
+
+                CommandHelperDiscordPrivate.help(event);
+
+            }
             else{
-                event.getAuthor().openPrivateChannel().complete().sendMessage("Command not recognised").queue();
+                event.getAuthor().openPrivateChannel().complete().sendMessage("Command not recognised\nTry -help for more information").queue();
             }
         }
 

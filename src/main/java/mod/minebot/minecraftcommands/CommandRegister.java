@@ -8,6 +8,7 @@ public class CommandRegister {
     @Mod.EventHandler
     public void registercommands(FMLServerStartingEvent event){
         event.registerServerCommand(new RegisterPlayer());
+        event.registerServerCommand(new CommandHelperMinecraft());
 
     }
 }

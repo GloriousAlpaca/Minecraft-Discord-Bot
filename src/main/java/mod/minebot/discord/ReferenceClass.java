@@ -16,20 +16,22 @@ public class ReferenceClass {
     //MessageDiscordKeys
     public static String setdefaultchannel ="setdefault";
     public static String getserverstatus ="serverstatus";
+    public static String getplayerstats ="playerstats";
     //MessageDiscordDescription
-    public static String setdefaultchannelD ="setdefault";
-    public static String getserverstatusD ="serverstatus";
+    public static String setdefaultchannelD ="The owner can set the default channel in which messages will be displayed";
+    public static String getserverstatusD ="Shows the status of the Server and a List of current players";
+    public static String getplayerstatsD ="Get the stats of a Player or Discord user if registered";
     //MessageDiscordPrivateKeys
     public static String registeraccount="-register";
     public static String donotregister="-dontregister";
     public static String unregister="-unregister";
     //MessageDiscordPrivateDescription
-    public static String registeraccountD="-register";
-    public static String donotregisterD="-dontregister";
-    public static String unregisterD="-unregister";
+    public static String registeraccountD="Confirm your registration in Discord";
+    public static String donotregisterD="Cancel a registration";
+    public static String unregisterD="Undo a registration";
     //MessageMinecraftKeys
     public static String registerminecraftname="registername";
     //MessageMinecraftDescription
-    public static String registerminecraftnameD="registername";
+    public static String registerminecraftnameD="Start to register your Minecraft account with your Discord account";
 
 }

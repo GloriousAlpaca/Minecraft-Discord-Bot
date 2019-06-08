@@ -9,13 +9,15 @@ public class CommandHelperDiscord {
 
     public static void help(MessageReceivedEvent event){
 
-        /*EmbedBuilder builder = new EmbedBuilder();
-        builder.setColor();
-        builder.setAuthor();
-        builder.setTitle();
-        builder.setDescription();
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(3381759);
+        builder.setAuthor("Commands for use on this Server");
+        builder.setDescription("at Minebot "+ReferenceClass.setdefaultchannel+" :\n"+ReferenceClass.setdefaultchannelD+
+                "\nat Minebot "+ReferenceClass.getserverstatus+" :\n"+ReferenceClass.getserverstatusD
 
-        SendMessage.sendMessage(builder);*/
+        );
+
+        SendMessage.sendMessage(builder.build());
 
     }
 }

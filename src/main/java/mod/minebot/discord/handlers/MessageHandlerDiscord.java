@@ -5,8 +5,7 @@ import mod.minebot.discord.ReferenceClass;
 import mod.minebot.discord.SendMessage;
 import mod.minebot.discord.persistence.Reader;
 import mod.minebot.discord.persistence.Writer;
-import mod.minebot.discord.tasks.serverStatus;
-import mod.minebot.discord.tasks.setDefaultChannel;
+import mod.minebot.discord.tasks.*;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -26,6 +25,15 @@ public class MessageHandlerDiscord {
 
             serverStatus.getServerStatus(event);
 
+
+        }
+        else if(message.contains("<@")&&message.contains(MinebotConfig.discord.clientid+">")&&message.contains("help")){
+            CommandHelperDiscord.help(event);
+
+        }
+        else if(message.contains("<@")&&message.contains(MinebotConfig.discord.clientid+">")&&message.contains(ReferenceClass.getplayerstats)){
+
+            PlayerStatistics.showstatistics(event, ParseCommand.parse(event));
 
         }
 
