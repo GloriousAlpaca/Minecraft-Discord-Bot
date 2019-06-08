@@ -26,7 +26,7 @@ public static void writetofile(String key,String content){
         props.load(reader);
         props.setProperty(key, content);
         FileWriter writer = new FileWriter(file);
-        props.store(writer, "test");
+        props.store(writer, "playertable");
         writer.close();
     } catch (FileNotFoundException ex) {
         LOG.info("Config File " + path + " not found");
@@ -58,5 +58,27 @@ public static void writetofile(String key,String content){
         } catch (IOException ex) {
             LOG.info("IO Error");
         }
+    }
+
+    public static void delete(String key){
+
+        String path = ReferenceClass.defaultconfig.replace("minebot.cfg","settings.properties");
+
+        File file = new File(path);
+
+        try {
+            FileReader reader = new FileReader(file);
+            Properties props = new Properties();
+            props.load(reader);
+            props.remove(key);
+            FileWriter writer = new FileWriter(file);
+            props.store(writer, "playertable");
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            LOG.info("Config File " + path + " not found");
+        } catch (IOException ex) {
+            LOG.info("IO Error");
+        }
+
     }
 }

@@ -33,7 +33,10 @@ public class Reader {
                 reader.close();
             } catch (FileNotFoundException ex) {
                 LOG.info("Config File " + path + " not found");
-            } catch (IOException ex) {
+            }
+            catch (NullPointerException ex) {
+                LOG.info("Nullpointer muss nicht schlecht sein");
+            }catch (IOException ex) {
                 LOG.info("IO Error");
             }
 

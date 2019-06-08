@@ -5,6 +5,7 @@ import javax.security.auth.login.LoginException;
 import mod.minebot.MinebotConfig;
 import mod.minebot.discord.listener.GuildReadyListener;
 import mod.minebot.discord.listener.MessageListener;
+import mod.minebot.discord.listener.MessageListenerPrivate;
 import mod.minebot.discord.listener.StartListener;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
@@ -25,6 +26,7 @@ public class DISCORDBOT {
         builder.addEventListener(new GuildReadyListener());
         builder.addEventListener(new StartListener());
         builder.addEventListener(new MessageListener());
+        builder.addEventListener(new MessageListenerPrivate());
 
         
 
