@@ -11,8 +11,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
-import java.util.UUID;
-
 public class RegisterPlayer extends CommandBase {
     @Override
     public String getName() {

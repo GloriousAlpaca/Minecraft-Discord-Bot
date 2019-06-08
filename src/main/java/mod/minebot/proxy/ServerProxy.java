@@ -3,7 +3,6 @@ package mod.minebot.proxy;
 import javax.security.auth.login.LoginException;
 
 import mod.minebot.discord.DISCORDBOT;
-import mod.minebot.tileentity.TileEntityInterface;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.TextureStitchEvent;

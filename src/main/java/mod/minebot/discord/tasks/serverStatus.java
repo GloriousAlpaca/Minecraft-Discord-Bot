@@ -1,18 +1,12 @@
 package mod.minebot.discord.tasks;
 
+import java.awt.Color;
+
 import mod.minebot.discord.SendMessage;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.gui.MinecraftServerGui;
-import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-
-import java.awt.*;
-
-import static mod.minebot.MINEBOT.LOG;
 
 public class serverStatus {
 

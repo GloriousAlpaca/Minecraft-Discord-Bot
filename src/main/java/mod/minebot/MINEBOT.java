@@ -2,14 +2,18 @@ package mod.minebot;
 
 import mod.minebot.block.BlockInterface;
 import mod.minebot.discord.ReferenceClass;
+import mod.minebot.discord.SendMessage;
 import mod.minebot.minecraftcommands.RegisterPlayer;
 import mod.minebot.network.PacketHandler;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import mod.minebot.proxy.IProxy;
 import mod.minebot.tileentity.TileEntityInterface;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -24,6 +28,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -74,11 +79,31 @@ public class MINEBOT {
 	}
 	
 	@Mod.EventHandler
-    public void registerCommand(FMLServerStartingEvent event){
+    public void serverStarting(FMLServerStartingEvent event){
         event.registerServerCommand(new RegisterPlayer());
-        
+        EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(3381759);
+		builder.setDescription("Server is starting...");
+        SendMessage.sendMessage(builder.build());
+    }
+	
+	@Mod.EventHandler
+    public void serverStarted(FMLServerStartedEvent event){
+        EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(3381759);
+		builder.setDescription("Server is online!");
+        SendMessage.sendMessage(builder.build());
     }
     
+	@Mod.EventHandler
+    public void serverStopping(FMLServerStoppingEvent event){
+        EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(3381759);
+		builder.setDescription("Server is stopping...");
+        SendMessage.sendMessage(builder.build());
+        ReferenceClass.main.shutdown();
+    }
+	
     @Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 

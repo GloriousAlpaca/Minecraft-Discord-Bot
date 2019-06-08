@@ -9,9 +9,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatList;
-import net.minecraft.stats.StatisticsManager;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -180,7 +178,7 @@ public class EventHandler {
 		builder.setTitle(entity.getName());
 		builder.setDescription(deathmessage);
 		if(entity instanceof EntityPlayerMP) {
-			float c = ((EntityPlayerMP) entity).getStatFile().readStat(StatList.DEATHS)+1;
+			int c = ((EntityPlayerMP) entity).getStatFile().readStat(StatList.DEATHS)+1;
 			float t = ((EntityPlayerMP) entity).getStatFile().readStat(StatList.TIME_SINCE_DEATH);
 			t = t/1000;
 			String time = " minutes";

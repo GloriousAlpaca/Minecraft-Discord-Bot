@@ -1,9 +1,7 @@
 package mod.minebot.proxy;
 
 import mod.minebot.MINEBOT;
-import mod.minebot.discord.DISCORDBOT;
 import mod.minebot.gui.GuiInterface;
-import mod.minebot.tileentity.TileEntityInterface;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
