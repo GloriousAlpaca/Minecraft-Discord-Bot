@@ -23,7 +23,6 @@ public class PlayerStatistics {
     public static void showstatistics(MessageReceivedEvent event, String argument){
     	UUID id;
         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-        EntityPlayerMP player = null;
         if(argument.equals(null)){
             SendMessage.sendMessage("No Discord ID or Minecraft name given");
         }
@@ -32,13 +31,13 @@ public class PlayerStatistics {
             if(argument.contains("d-")){
                 String argumentparsed = argument.replace("d-","");
                 id = UUID.fromString(Reader.readfromfile(argumentparsed));
-                player = server.getPlayerList().getPlayerByUUID(id);
-            }
-            else {
-                player = server.getPlayerList().getPlayerByUsername(argument);
 
             }
-            if(player==null){
+            else {
+                id = server.getPlayerList().getPlayerByUsername(argument).getUniqueID();
+
+            }
+            if(id==null){
                 SendMessage.sendMessage("Player not found");
 
             }
