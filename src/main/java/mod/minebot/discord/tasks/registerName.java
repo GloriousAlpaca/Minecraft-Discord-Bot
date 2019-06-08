@@ -15,7 +15,7 @@ public class registerName {
 
         }
         if(test == null){
-            event.getAuthor().openPrivateChannel().complete().sendMessage("Registration was not initiated yet.\nYou can register by typing /registername ´yourdiscordID´ on the minecraft server").queue();
+            event.getAuthor().openPrivateChannel().complete().sendMessage("Registration was not initiated yet.\nYou can register by typing /registername \"yourdiscordID\" on the minecraft server").queue();
         }
         else{
             String MinecraftID = Reader.readfromfile(event.getAuthor().getId());

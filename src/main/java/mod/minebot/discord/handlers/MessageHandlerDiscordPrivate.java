@@ -14,16 +14,16 @@ public class MessageHandlerDiscordPrivate {
 
         }
         else{
-            if(event.getMessage().getContentDisplay().contains("-register")){
+            if(event.getMessage().getContentDisplay().contains(ReferenceClass.registeraccount)){
 
                 registerName.register(event);
             }
-            else if(event.getMessage().getContentDisplay().contains("-dontregister")){
+            else if(event.getMessage().getContentDisplay().contains(ReferenceClass.donotregister)){
 
                 registerName.unregister(event,1);
 
             }
-            else if(event.getMessage().getContentDisplay().contains("-unlink")){
+            else if(event.getMessage().getContentDisplay().contains(ReferenceClass.unregister)){
 
                 registerName.unregister(event,2);
 

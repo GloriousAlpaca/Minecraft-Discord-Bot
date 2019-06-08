@@ -17,12 +17,12 @@ public class MessageHandlerDiscord {
         String message = event.getMessage().getContentRaw();
 
 
-        if(message.contains("<@")&&message.contains(MinebotConfig.discord.clientid+">")&&message.contains("setdefault")){
+        if(message.contains("<@")&&message.contains(MinebotConfig.discord.clientid+">")&&message.contains(ReferenceClass.setdefaultchannel)){
 
             setDefaultChannel.setChannel(event);
 
         }
-        else if(message.contains("<@")&&message.contains(MinebotConfig.discord.clientid+">")&&message.contains("serverstatus")){
+        else if(message.contains("<@")&&message.contains(MinebotConfig.discord.clientid+">")&&message.contains(ReferenceClass.getserverstatus)){
 
             serverStatus.getServerStatus(event);
 

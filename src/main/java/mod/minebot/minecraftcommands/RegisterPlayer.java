@@ -16,7 +16,7 @@ import java.util.UUID;
 public class RegisterPlayer extends CommandBase {
     @Override
     public String getName() {
-        return "registername";
+        return ReferenceClass.registerminecraftname;
     }
 
     @Override
