@@ -10,10 +10,10 @@ public class ParseCommand {
         String behead = null;
         String raw = event.getMessage().getContentRaw();
         if(raw.contains("<@!")){
-            behead = raw.replace("<@!"+MinebotConfig.discord.clientid+"> playerstats","");
+            behead = raw.replace("<@!"+MinebotConfig.discord.clientid+"> playerstats ","");
         }
         else{
-            behead = raw.replace("<@"+MinebotConfig.discord.clientid+"> playerstats","");
+            behead = raw.replace("<@"+MinebotConfig.discord.clientid+"> playerstats ","");
 
         }
         return behead;
