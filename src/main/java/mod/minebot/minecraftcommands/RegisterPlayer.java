@@ -2,7 +2,6 @@ package mod.minebot.minecraftcommands;
 
 import mod.minebot.discord.persistence.Writer;
 import mod.minebot.network.ChatMessage;
-import mod.minebot.network.InterfaceMessage;
 import mod.minebot.network.PacketHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;

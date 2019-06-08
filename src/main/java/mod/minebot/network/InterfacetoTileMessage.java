@@ -81,7 +81,7 @@ public class InterfacetoTileMessage implements IMessage{
 					((TileEntityInterface)te).text = message.text;
 					((TileEntityInterface)te).sender = message.sender;
 					((TileEntityInterface)te).secure = message.secure;
-					
+					te.markDirty();
 				}
 			}
 		}

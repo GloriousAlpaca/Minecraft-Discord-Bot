@@ -3,7 +3,8 @@ package mod.minebot.block;
 import javax.annotation.Nullable;
 
 import mod.minebot.MINEBOT;
-import mod.minebot.gui.GuiHandler;
+import mod.minebot.network.InterfaceGuiMessage;
+import mod.minebot.network.PacketHandler;
 import mod.minebot.tileentity.TileEntityInterface;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -14,6 +15,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -33,7 +35,6 @@ public class BlockInterface extends Block{
 	@ObjectHolder(value = "minebot:dcinterface")
 	public final static Item itemdcinterface=null;
 	
-	public TileEntityInterface tile;
 	
 	public BlockInterface() {
 		super(Material.IRON,MapColor.STONE);
@@ -49,17 +50,35 @@ public class BlockInterface extends Block{
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote) {
-				player.openGui(MINEBOT.instance, GuiHandler.INTERFACE, world, pos.getX(), pos.getY(), pos.getZ());
+				TileEntityInterface tile = (TileEntityInterface) world.getTileEntity(pos);
+				if(player.getUniqueID()==tile.UUID || !tile.secure) {
+					tile.UUID = player.getUniqueID();
+					PacketHandler.INSTANCE.sendTo(new InterfaceGuiMessage( tile.text, tile.secure, tile.sender, pos), (EntityPlayerMP) player);}
+				else
+					return false;
 		}
 		return true;
 	}
 	
+	@Override
+	public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos)
+    {
+		worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
+		TileEntityInterface tile = (TileEntityInterface) worldIn.getTileEntity(pos);
+		if(player.getUniqueID()==tile.UUID||!tile.secure) {
+			return net.minecraftforge.common.ForgeHooks.blockStrength(state, player, worldIn, pos);}
+		else {
+			return -1.0F;}
+    }
+	
+	@Override
 	public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player)
     {
-		if(player.getUniqueID()==tile.UUID && tile.secure)
-			return net.minecraftforge.common.ForgeHooks.canHarvestBlock(this, player, world, pos);
-		else
-			return false;
+		TileEntityInterface tile = (TileEntityInterface) world.getTileEntity(pos);
+		if(player.getUniqueID()==tile.UUID||!tile.secure) {
+			return net.minecraftforge.common.ForgeHooks.canHarvestBlock(this, player, world, pos);}
+		else {
+			return false;}
     }
 	
 	/**
@@ -73,6 +92,7 @@ public class BlockInterface extends Block{
     	if(!worldIn.isRemote)
         if (worldIn.isBlockPowered(pos))
         {
+        	TileEntityInterface tile = (TileEntityInterface) worldIn.getTileEntity(pos);
         	tile.sendToServer();
         }
     }
@@ -101,7 +121,7 @@ public class BlockInterface extends Block{
 	@Nullable
 	@Override
 	public TileEntityInterface createTileEntity(World world, IBlockState state) {
-		tile = new TileEntityInterface();
+		TileEntityInterface tile = new TileEntityInterface();
 		return tile;
 		
 	}
@@ -117,6 +137,8 @@ public class BlockInterface extends Block{
 	@Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
     	 world.setBlockState(pos, state.withProperty(FACING, entity.getHorizontalFacing().getOpposite()), 2);
+    	 TileEntityInterface tile = (TileEntityInterface) world.getTileEntity(pos);
+    	 if(entity instanceof EntityPlayer)
     	 tile.UUID = entity.getUniqueID();
     }
 	

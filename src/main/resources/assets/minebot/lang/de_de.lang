@@ -1,0 +1,12 @@
+# Blocks
+tile.minebot.dcinterface.name=Discord Interface
+
+# Misc
+itemGroup.Minebot=Minebot
+#Gui
+minebot.text.text=Nachricht
+minebot.text.setText=Discord Nachricht setzen
+minebot.button.receiver=Empfänger
+minebot.button.sender=Sender
+minebot.button.notsecure=Nicht gesichert
+minebot.button.secure=Gesichert

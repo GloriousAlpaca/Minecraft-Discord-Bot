@@ -8,8 +8,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import mod.minebot.discord.SendMessage;
-import mod.minebot.gui.GuiHandler;
 import mod.minebot.proxy.IProxy;
 import mod.minebot.tileentity.TileEntityInterface;
 import net.minecraft.block.Block;
@@ -27,7 +25,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -51,7 +48,7 @@ public class MINEBOT {
     	
     	@Override
     	public ItemStack getTabIconItem() {
-    		return ItemStack.EMPTY;
+    		return new ItemStack(BlockInterface.itemdcinterface,1);
     	}
     };
     
@@ -74,7 +71,6 @@ public class MINEBOT {
     	proxy.startBot();
     	EventHandler.register();
     	PacketHandler.registerMessages(MODID);
-    	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 	}
 	
 	@Mod.EventHandler

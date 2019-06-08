@@ -175,7 +175,7 @@ public class EventHandler {
 		builder.setAuthor("Death:");
 		builder.setTitle(entity.getName());
 		builder.setDescription(deathmessage);
-		builder.appendDescription("*Deathcount: "+0+"*");
+		//builder.appendDescription("*Deathcount: "+0+"*");
 		//Discordbot sendet String
 		SendMessage.sendMessage(builder.build());}
 	}

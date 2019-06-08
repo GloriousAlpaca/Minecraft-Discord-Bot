@@ -3,29 +3,33 @@ package mod.minebot.network;
 import java.nio.charset.StandardCharsets;
 
 import io.netty.buffer.ByteBuf;
+import mod.minebot.MINEBOT;
 import mod.minebot.gui.GuiInterface;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class InterfaceReturnMessage implements IMessage{
+public class InterfaceGuiMessage implements IMessage{
 	
 	//Client Side Packet
 	private boolean secure;
 	private String text;
 	private boolean sender;
 	private boolean valid;
+	private BlockPos pos;
 	
-	public InterfaceReturnMessage() {
+	public InterfaceGuiMessage() {
 		valid = false;
 	}
 	
-	public InterfaceReturnMessage(String text, boolean secure, boolean sender) {
+	public InterfaceGuiMessage(String text, boolean secure, boolean sender, BlockPos ppos) {
 		this.secure = secure;
 		this.sender = sender;
 		this.text = text;
+		this.pos = ppos;
 		valid = true;
 	}
 	
@@ -37,6 +41,7 @@ public class InterfaceReturnMessage implements IMessage{
 			this.sender = buf.readBoolean();
 			int length = buf.readInt();
 			this.text = buf.readCharSequence(length, StandardCharsets.UTF_8).toString();
+			this.pos = new BlockPos(buf.readInt(),buf.readInt(),buf.readInt());
 		}
 		catch(IndexOutOfBoundsException ioe) {
 			return;
@@ -50,23 +55,24 @@ public class InterfaceReturnMessage implements IMessage{
 		buf.writeBoolean(sender);
 		buf.writeInt(text.length());
 		buf.writeCharSequence(text, StandardCharsets.UTF_8);
+		buf.writeInt(pos.getX());
+		buf.writeInt(pos.getY());
+		buf.writeInt(pos.getZ());
 	}
 	
-	public static class Handler implements IMessageHandler<InterfaceReturnMessage, IMessage>{
+	public static class Handler implements IMessageHandler<InterfaceGuiMessage, IMessage>{
 
 		@Override
-		public IMessage onMessage(InterfaceReturnMessage message, MessageContext ctx) {
+		public IMessage onMessage(InterfaceGuiMessage message, MessageContext ctx) {
 				if(!message.valid && ctx.side != Side.CLIENT)
 				return null;
 			Minecraft.getMinecraft().addScheduledTask(() -> processMessage(message,ctx));
 			return null;
 		}
 		
-		public void processMessage(InterfaceReturnMessage message, MessageContext ctx) {
+		public void processMessage(InterfaceGuiMessage message, MessageContext ctx) {
 			try {
-				GuiInterface.initsender = message.sender;
-				GuiInterface.initsecure = message.secure;
-				GuiInterface.inittext = message.text;
+				MINEBOT.proxy.displayGui(message.pos, message.secure, message.sender, message.text);
 			} catch(Exception e) {
 				
 			}

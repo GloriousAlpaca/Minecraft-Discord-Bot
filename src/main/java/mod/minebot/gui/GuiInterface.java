@@ -5,18 +5,16 @@ import java.util.Random;
 
 import org.lwjgl.input.Keyboard;
 
-import mod.minebot.network.InterfaceMessage;
 import mod.minebot.network.InterfacetoTileMessage;
 import mod.minebot.network.PacketHandler;
-import mod.minebot.tileentity.TileEntityInterface;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.math.BlockPos;
 
 public class GuiInterface extends GuiScreen{
 	
-    private final TileEntityInterface te;
     /*Textfelder*/
     GuiTextField messageTextField;
     /*Buttons*/
@@ -25,16 +23,17 @@ public class GuiInterface extends GuiScreen{
     private GuiButton modeBtn;
     private GuiButton secureBtn;
     /*Variablen*/
-    public static boolean initsecure;
-    public static boolean initsender;
-    public static String inittext;
-    
     private boolean secure;
     private boolean sender;
+    public String text;
+    BlockPos pos;
+
     
-    public GuiInterface(TileEntityInterface tileentity) {
-    	this.te = tileentity;
-    	
+    public GuiInterface(BlockPos ppos, boolean psecure, boolean psender, String ptext) {
+    	this.pos = ppos;
+    	this.secure = psecure;
+    	this.sender = psender;
+    	this.text = ptext;
     }
     
     /**
@@ -58,27 +57,15 @@ public class GuiInterface extends GuiScreen{
         this.buttonList.clear();
         this.doneBtn = this.addButton(new GuiButton(0, this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.done")));
         this.cancelBtn = this.addButton(new GuiButton(1, this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.cancel")));
-        this.modeBtn = this.addButton(new GuiButton(2, this.width / 2 - 50 - 100 - 4, 165, 100, 20, I18n.format("minebot.button.sender")));
-        this.secureBtn = this.addButton(new GuiButton(4, this.width / 2 , 165, 100, 20, I18n.format("minebot.button.secure")));
+        this.modeBtn = this.addButton(new GuiButton(2, this.width / 2 - 50 - 100 - 4,this.height / 4 + 120 + 12-24, 150, 20, I18n.format("minebot.button.sender")));
+        this.secureBtn = this.addButton(new GuiButton(4, this.width / 2 + 4,this.height / 4 + 120 + 12-24, 150, 20, I18n.format("minebot.button.secure")));
         this.messageTextField = new GuiTextField(3, this.fontRenderer, this.width / 2 - 150, 50, 300, 20);
         this.messageTextField.setMaxStringLength(2000);
         this.messageTextField.setFocused(true);
         this.doneBtn.enabled = false;
         this.modeBtn.enabled = false;
         this.secureBtn.enabled = false;
-        PacketHandler.INSTANCE.sendToServer(new InterfaceMessage(te.getPos()));
-        this.messageTextField.setText(inittext);
-        if(initsender)
-        	this.modeBtn.displayString = "minebot.button.sender";
-        else
-        	this.modeBtn.displayString = "minebot.button.receiver";
-        if(initsecure)
-        	this.secureBtn.displayString = "minebot.button.secure";
-        else
-        	this.secureBtn.displayString = "minebot.button.notsecure";
-        sender = initsender;
-        secure = initsecure;
-        System.out.println("Tile Entity: "+te.test);
+        this.messageTextField.setText(text);
     }
     
     public void updateGui()
@@ -161,7 +148,7 @@ public class GuiInterface extends GuiScreen{
             {
             	PacketHandler.INSTANCE.sendToServer(
             			new InterfacetoTileMessage(
-            					te.getPos(),
+            					pos,
             					messageTextField.getText(), 
             					sender, 
             					secure ));
@@ -170,7 +157,6 @@ public class GuiInterface extends GuiScreen{
             //Mode Button
             else if (button.id == 2)
             {
-            	System.out.println("SENDER: "+sender);
             	if(sender) {
             		sender = false;
             	}
@@ -193,17 +179,17 @@ public class GuiInterface extends GuiScreen{
     
     public void updateSecure() {
     	if(secure) {
-    		this.secureBtn.displayString = I18n.format("minebot.button.notsecure");
+    		this.secureBtn.displayString = I18n.format("minebot.button.secure");
     	}
     	else
-    		this.secureBtn.displayString = I18n.format("minebot.button.secure");
+    		this.secureBtn.displayString = I18n.format("minebot.button.notsecure");
     }
     
     public void updateMode() {
     	if(sender) {
-    		this.modeBtn.displayString = I18n.format("minebot.button.receiver");
+    		this.modeBtn.displayString = I18n.format("minebot.button.sender");
     	}
     	else
-    		this.modeBtn.displayString = I18n.format("minebot.button.sender");
+    		this.modeBtn.displayString = I18n.format("minebot.button.receiver");
     }
 }
