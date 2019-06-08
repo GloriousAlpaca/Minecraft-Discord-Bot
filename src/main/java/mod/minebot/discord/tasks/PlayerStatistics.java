@@ -30,7 +30,7 @@ public class PlayerStatistics {
 
             if(argument.contains("d-")){
                 String argumentparsed = argument.replace("d-","");
-                UUID id = server.getPlayerProfileCache().getGameProfileForUsername(Reader.readfromfile(argumentparsed)).getId();
+                UUID id = UUID.fromString(Reader.readfromfile(argumentparsed));
                 player = server.getPlayerList().getPlayerByUUID(id);
             }
             else {
