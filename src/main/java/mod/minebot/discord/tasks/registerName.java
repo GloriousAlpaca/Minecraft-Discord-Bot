@@ -7,10 +7,16 @@ import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 public class registerName {
 
     public static void register(PrivateMessageReceivedEvent event){
+        String test=null;
+        try{
+            test=Reader.readfromfile(event.getAuthor().getId());
+        }
+        catch(NullPointerException e){
 
+        }
+        System.out.println(test);
 
-
-        if(Reader.readfromfile(event.getAuthor().getId()).equals(null)){
+        if(test.equals("null")){
             event.getAuthor().openPrivateChannel().complete().sendMessage("Registration was not initiated yet.\nYou can register by typing /registername ´yourdiscordID´ on the minecraft server").queue();
         }
         else{
@@ -32,9 +38,13 @@ public class registerName {
 
         String MinecraftID = Reader.readfromfile(event.getAuthor().getId());
 
-        Writer.delete(MinecraftID);
-        Writer.delete(MinecraftID+"verify");
-        Writer.delete(event.getAuthor().getId());
+        try {
+            Writer.delete(MinecraftID);
+            Writer.delete(MinecraftID + "verify");
+            Writer.delete(event.getAuthor().getId());
+        }
+        catch (NullPointerException e) {
+        }
         if(c==1){
             event.getAuthor().openPrivateChannel().complete().sendMessage("Your have not been registered").queue();
         }
