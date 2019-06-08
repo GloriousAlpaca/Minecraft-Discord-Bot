@@ -133,7 +133,7 @@ public class EventHandler {
 		builder.setDescription(chat);
 		//Discordbot sendet String
 		SendMessage.sendMessage(builder.build());
-		System.out.println(event.getPlayer().getUniqueID());
+
 	}
 	}
 	

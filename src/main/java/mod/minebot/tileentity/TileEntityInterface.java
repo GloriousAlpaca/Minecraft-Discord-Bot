@@ -40,10 +40,6 @@ public class TileEntityInterface extends TileEntity{
 			compound.setUniqueId("owner",UUID);
 			compound.setBoolean("secure",secure);
 			compound.setBoolean("sender",sender);
-			System.out.println(text);
-			System.out.println(UUID);
-			System.out.println(secure);
-			System.out.println(sender);
 			return super.writeToNBT(compound);
 		}
 
@@ -53,10 +49,6 @@ public class TileEntityInterface extends TileEntity{
 			UUID = compound.getUniqueId("owner");
 			secure = compound.getBoolean("secure");
 			sender = compound.getBoolean("sender");
-			System.out.println(text);
-			System.out.println(UUID);
-			System.out.println(secure);
-			System.out.println(sender);
 			super.readFromNBT(compound);
 		}
 		
