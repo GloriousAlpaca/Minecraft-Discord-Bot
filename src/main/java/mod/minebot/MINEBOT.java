@@ -37,7 +37,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class MINEBOT {
 	
 	/*Formalitäten*/
-	public static final String MODID = "minebot";
+	public static final String MODID = "aminebot";
     public static final String NAME = "Minebot";
     public static final String DESCRIPTION = "A Minecraft Discord Bot";
     public static final String AUTHOR = "SaltStation and GloriousAlpaca";
