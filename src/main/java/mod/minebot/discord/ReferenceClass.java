@@ -20,7 +20,7 @@ public class ReferenceClass {
     //MessageDiscordDescription
     public static String setdefaultchannelD ="The owner can set the default channel in which messages will be displayed";
     public static String getserverstatusD ="Shows the status of the Server and a List of current players";
-    public static String getplayerstatsD ="Get the stats of a Player or Discord user if registered";
+    public static String getplayerstatsD ="Get the stats of a Discord user or a Minecraft player if registered";
     //MessageDiscordPrivateKeys
     public static String registeraccount="-register";
     public static String donotregister="-dontregister";

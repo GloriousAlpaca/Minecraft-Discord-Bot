@@ -13,7 +13,8 @@ public class CommandHelperDiscord {
         builder.setColor(3381759);
         builder.setAuthor("Commands for use on this Server");
         builder.setDescription("at Minebot "+ReferenceClass.setdefaultchannel+" :\n"+ReferenceClass.setdefaultchannelD+
-                "\nat Minebot "+ReferenceClass.getserverstatus+" :\n"+ReferenceClass.getserverstatusD
+                "\nat Minebot "+ReferenceClass.getserverstatus+" :\n"+ReferenceClass.getserverstatusD+
+                "\nat Minebot "+ReferenceClass.getplayerstats+" d-\"discordid\" or \"MinecraftName\""+" :\n"+ReferenceClass.getplayerstatsD
 
         );
 
