@@ -32,7 +32,6 @@ public class PlayerStatistics {
                 String argumentparsed = argument.replace("d-","");
                 UUID id = UUID.fromString(Reader.readfromfile(argumentparsed));
                 player = server.getPlayerList().getPlayerByUUID(id);
-                SendMessage.sendMessage(id.toString());
             }
             else {
                 player = server.getPlayerList().getPlayerByUsername(argument);
