@@ -69,7 +69,6 @@ public class MINEBOT {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
     	LOG.info(NAME + " pre-initialization");
-    	LOG.info("Starting Bot...");
         config = new Configuration(event.getSuggestedConfigurationFile());
         ReferenceClass.defaultconfig=event.getSuggestedConfigurationFile().getPath();
         if(MinebotConfig.discord.bot)

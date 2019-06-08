@@ -2,6 +2,7 @@ package mod.minebot.proxy;
 
 import javax.security.auth.login.LoginException;
 
+import mod.minebot.MINEBOT;
 import mod.minebot.discord.DISCORDBOT;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
@@ -29,6 +30,7 @@ public class ServerProxy implements IProxy{
 	@Override
 	public void startBot() {
 		try {
+			MINEBOT.LOG.info("Starting Bot...");
 			new DISCORDBOT(null);
 		} catch (LoginException e) {
 			e.printStackTrace();
