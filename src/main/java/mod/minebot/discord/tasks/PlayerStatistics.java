@@ -38,7 +38,7 @@ public class PlayerStatistics {
 		builder.setColor(13158650);
 		builder.setAuthor(player.getName());
 		builder.setTitle((Arrays.asList(server.getOnlinePlayerProfiles()).contains(server.getPlayerProfileCache().getProfileByUUID(id))) ? "Online":"Offline");
-		builder.setDescription("Time Played: "+stat.readStat(StatList.PLAY_ONE_MINUTE)+" minutes");
+		builder.setDescription("Time Played: "+stat.readStat(StatList.PLAY_ONE_MINUTE)/1000+" minutes");
 		builder.appendDescription("\nDamage dealt: "+stat.readStat(StatList.DAMAGE_DEALT));
 		builder.appendDescription("\nMob kills: "+stat.readStat(StatList.MOB_KILLS));
 		builder.appendDescription("\nPlayer Kills: "+stat.readStat(StatList.PLAYER_KILLS));
@@ -51,7 +51,7 @@ public class PlayerStatistics {
 		builder.appendDescription("\nDistance traveled : "+m+" meters");
 		builder.appendDescription("\n**Random Fact:**");
 		StatBase randomstat = StatList.ALL_STATS.get(new Random().nextInt(StatList.ALL_STATS.size()));
-		builder.appendDescription("\n"+randomstat.getStatName()+": "+stat.readStat(randomstat));
+		builder.appendDescription("\n"+randomstat.getStatName().getUnformattedText()+": "+stat.readStat(randomstat));
 		SendMessage.sendMessage(builder.build());
     }
 }
