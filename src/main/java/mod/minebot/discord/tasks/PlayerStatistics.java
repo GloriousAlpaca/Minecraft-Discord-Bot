@@ -66,8 +66,8 @@ public class PlayerStatistics {
         		builder.appendDescription("\n"+randomstat.getStatName().getUnformattedText()+": "+stat.readStat(randomstat));
         		SendMessage.sendMessage(builder.build());
             }
-
         }
+
 
     }
 }
