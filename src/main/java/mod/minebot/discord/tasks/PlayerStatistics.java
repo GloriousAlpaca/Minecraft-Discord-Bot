@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 public class PlayerStatistics {
 
     public static void showstatistics(MessageReceivedEvent event, String argument){
-
+    	UUID id;
         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         EntityPlayerMP player = null;
         if(argument.equals(null)){
@@ -31,7 +31,7 @@ public class PlayerStatistics {
 
             if(argument.contains("d-")){
                 String argumentparsed = argument.replace("d-","");
-                UUID id = UUID.fromString(Reader.readfromfile(argumentparsed));
+                id = UUID.fromString(Reader.readfromfile(argumentparsed));
                 player = server.getPlayerList().getPlayerByUUID(id);
             }
             else {
@@ -44,7 +44,7 @@ public class PlayerStatistics {
             }
             else{
 
-                UUID id = player.getUniqueID();
+                
                 File file1 = new File(server.getWorld(0).getSaveHandler().getWorldDirectory(), "stats");
                 File file2 = new File(file1, id + ".json");
                 
