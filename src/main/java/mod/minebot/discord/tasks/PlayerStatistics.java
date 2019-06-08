@@ -1,6 +1,7 @@
 package mod.minebot.discord.tasks;
 
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
@@ -44,8 +45,10 @@ public class PlayerStatistics {
             else{
 
                 UUID id = player.getUniqueID();
-
-                StatisticsManagerServer stat = player.getStatFile();
+                File file1 = new File(server.getWorld(0).getSaveHandler().getWorldDirectory(), "stats");
+                File file2 = new File(file1, id + ".json");
+                
+                StatisticsManagerServer stat = new StatisticsManagerServer(server, file2);
                 EmbedBuilder builder = new EmbedBuilder();
         		builder.setColor(13158650);
         		builder.setAuthor(player.getName());
