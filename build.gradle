@@ -38,21 +38,33 @@ configurations {
 }
 configurations.compile.extendsFrom(configurations.inJar)
 
-dependencies {
-   inJar fileTree(dir: "libs", include: '*.jar')
+
+
+repositories {
+	mavenCentral()
+    jcenter()
 }
 
 
+dependencies {
+   //inJar fileTree(dir: "libs", include: '*.jar')
+   inJar ('net.dv8tion:JDA:3.8.3_463') {
+        exclude module: 'opus-java'
+
+    }
+	inJar 'org.slf4j:slf4j-api:1.7.26'
+	inJar 'org.slf4j:slf4j-simple:1.7.26'
+}
+
 jar {
+	
 	from(configurations.inJar) {
         into 'META-INF/libraries'
     }
-    manifest {
-        attributes(
-                'ContainedDeps': 'JDA-3.8.3_463-withDependencies.jar slf4j-api-1.7.26.jar slf4j-simple-1.7.26.jar'
-        )
-    }
+    
 }
+
+
 
 processResources {
     // this will ensure that this task is redone when the versions change.
@@ -71,4 +83,6 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+	
+	
 }
