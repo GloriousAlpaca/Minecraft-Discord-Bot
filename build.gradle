@@ -63,9 +63,7 @@ jar {
     }
     manifest {
         attributes(
-                'ContainedDeps': 'JDA-3.8.3_463.jar trove4j-3.0.3.jar slf4j-simple-1.7.26.jar slf4j-api-1.7.26.jar okio-1.17.2.jar 
-				okhttp-3.13.0.jar nv-websocket-client-2.5.jar jsr305-3.0.2.jar json-20160810.jar 
-				commons-collections4-4.1.jar annotations-16.0.1.jar'
+                'ContainedDeps': 'JDA-3.8.3_463.jar trove4j-3.0.3.jar slf4j-simple-1.7.26.jar slf4j-api-1.7.26.jar okio-1.17.2.jar okhttp-3.13.0.jar nv-websocket-client-2.5.jar jsr305-3.0.2.jar json-20160810.jar commons-collections4-4.1.jar annotations-16.0.1.jar'
         )
     }
 }
